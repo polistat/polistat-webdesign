@@ -25,7 +25,7 @@ SECRET_KEY = os.environ["POLISTAT_SECRETKEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.environ["POLISTAT_ALLOWED_HOST"]]
 
 
 # Application definition

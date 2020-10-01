@@ -1,3 +1,4 @@
 polistat.sock
 polistat/__pycache__/*
 *.sqlite3
+ignored/*

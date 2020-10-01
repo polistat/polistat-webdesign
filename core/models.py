@@ -40,6 +40,9 @@ class State(models.Model):
 
     description = models.TextField(default="not specified")
 
+    def __str__(self):
+        return self.name
+
 ##class District(models.Model):
 ##    name = models.CharField(max_length=500)
 ##    

@@ -19,10 +19,10 @@ class State(models.Model):
     rv_reps = models.FloatField(default=-1)
     rv_other = models.FloatField(default=-1)
 
-    senator_1 = models.CharField(default="not specified")
+    senator_1 = models.CharField(max_length=100,default="not specified")
     senator_1_party = models.CharField(max_length=1,choices=PARTY_CHOICES,default="not specified")
 
-    senator_2 = models.CharField(default="not specified")
+    senator_2 = models.CharField(max_length=100,default="not specified")
     senator_2_party = models.CharField(max_length=1,choices=PARTY_CHOICES,default="not specified")
 
     mailin_reason = models.CharField(max_length=40,choices=MAIL_IN_CHOICES,default="not specified")
@@ -78,7 +78,7 @@ class State(models.Model):
 #Blogpost Tag (or for anything else)
 class Tag(models.Model):
     name = models.CharField(max_length=100)
-    state = models.ForeignKey(State, null=True)
+    state = models.ForeignKey(State, null=True, on_delete=models.SET_NULL)
     #If an article is tagged with a state, it should be visible in that state's
     #States and their tags should be created in bulk
     

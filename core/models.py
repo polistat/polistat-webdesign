@@ -10,9 +10,9 @@ class State(models.Model):
     other_areas = models.TextField(default="not specified")
     cost_voting = models.CharField(max_length=20,default="not specified")
 
-    congressional_makeup=models.TextField(blank=True) #Raw JSON
+    #congressional_makeup=models.TextField(blank=True) #Raw JSON
 
-    important_congressional_elections = models.TextField(blank=True) #Raw JSON
+    #important_congressional_elections = models.TextField(blank=True) #Raw JSON
 
     electoral_votes = models.IntegerField(default=-1)
     rv_dems = models.FloatField(default=-1)
@@ -42,6 +42,39 @@ class State(models.Model):
 
     def __str__(self):
         return self.name
+
+class Senator(models.Model):
+    state = models.ForeignKey(State,on_delete=models.CASCADE)
+    name = models.CharField(blank=True,max_length=100)
+    party = models.CharField(blank=True,max_length=100)
+
+class SenateElection(models.Model):
+    state = models.ForeignKey(State,on_delete=models.CASCADE)
+    candidate1name = models.CharField(blank=True,max_length=100)
+    candidate1party = models.CharField(blank=True,max_length=100)
+    candidate1incumbent = models.BooleanField(default=False)
+    candidate2name = models.CharField(blank=True,max_length=100)
+    candidate2party = models.CharField(blank=True,max_length=100)
+
+class Representative(models.Model):
+    state = models.ForeignKey(State,on_delete=models.CASCADE)
+    district = models.IntegerField() #0 = AL
+    name = models.CharField(blank=True,max_length=100)
+    party = models.CharField(blank=True,max_length=100)
+
+class HouseElection(models.Model):
+    state = models.ForeignKey(State,on_delete=models.CASCADE)
+    district = models.IntegerField() #0 = AL
+    candidate1name = models.CharField(blank=True,max_length=100)
+    candidate1party = models.CharField(blank=True,max_length=100)
+    candidate1incumbent = models.BooleanField(default=False)
+    candidate2name = models.CharField(blank=True,max_length=100)
+    candidate2party = models.CharField(blank=True,max_length=100)
+
+class Demographic(models.Model):
+    state = models.ForeignKey(State,on_delete=models.CASCADE)
+    key = models.CharField(max_length=100)
+    important = models.BooleanField(default=False)
 
 ##class District(models.Model):
 ##    name = models.CharField(max_length=500)

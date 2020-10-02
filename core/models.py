@@ -74,6 +74,7 @@ class HouseElection(models.Model):
 class Demographic(models.Model):
     state = models.ForeignKey(State,on_delete=models.CASCADE)
     key = models.CharField(max_length=100)
+    value = models.NumberField(default=-1)
     important = models.BooleanField(default=False)
 
 ##class District(models.Model):

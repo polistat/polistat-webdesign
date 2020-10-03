@@ -5,7 +5,7 @@ MAIL_IN_CHOICES = [("Yes","Yes"),("No","No"),("Yes, with exceptions","Yes, with 
 class State(models.Model):
     name = models.CharField(max_length=100)
     initials = models.CharField(max_length=2)
-    important_chars = models.TextField(blank=True)
+    #important_chars = models.TextField(blank=True)
     capital = models.CharField(max_length=200,default="not specified")
     other_areas = models.TextField(default="not specified")
     cost_voting = models.CharField(max_length=20,default="not specified")
@@ -19,11 +19,11 @@ class State(models.Model):
     rv_reps = models.FloatField(default=-1)
     rv_other = models.FloatField(default=-1)
 
-    senator_1 = models.CharField(max_length=100,default="not specified")
-    senator_1_party = models.CharField(max_length=1,choices=PARTY_CHOICES,default="not specified")
+    #senator_1 = models.CharField(max_length=100,default="not specified")
+    #senator_1_party = models.CharField(max_length=1,choices=PARTY_CHOICES,default="not specified")
 
-    senator_2 = models.CharField(max_length=100,default="not specified")
-    senator_2_party = models.CharField(max_length=1,choices=PARTY_CHOICES,default="not specified")
+    #senator_2 = models.CharField(max_length=100,default="not specified")
+    #senator_2_party = models.CharField(max_length=1,choices=PARTY_CHOICES,default="not specified")
 
     mailin_reason = models.CharField(max_length=40,choices=MAIL_IN_CHOICES,default="not specified")
     mailin_notarization = models.CharField(max_length=40,choices=MAIL_IN_CHOICES,default="not specified")
@@ -36,12 +36,20 @@ class State(models.Model):
 
     turn_in_method = models.CharField(max_length=60,default="not specified")
 
-    pres_election_history = models.TextField(blank=True) #Raw json.  Each year to have votes for each party
+    #pres_election_history = models.TextField(blank=True) #Raw json.  Each year to have votes for each party
 
     description = models.TextField(default="not specified")
 
     def __str__(self):
         return self.name
+
+class PreviousElection(models.Model):
+    state = models.ForeignKey(State,on_delete=models.CASCADE)
+    year = models.IntegerField()
+    percent_dems = models.FloatField()
+    percent_reps = models.FloatField()
+    dem_candiate = models.CharField(max_length=100)
+    rep_candidate = models.CharField(max_length=100)
 
 class Senator(models.Model):
     state = models.ForeignKey(State,on_delete=models.CASCADE)

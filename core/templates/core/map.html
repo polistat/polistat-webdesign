@@ -374,12 +374,12 @@
     <tr class="tbl-row biden">
       <td class="cell-name cell-name-biden">Biden</td>
       <td class="cell-vote"> ${d3.format(",.0f")(state_ev.get(d.properties.name).voteshare_chal)}% </td>
-      <td class="cell-prob"> ${d3.format(",.0f")(state_ev.get(d.properties.name).winstate_chal * 100)}% </td>
+      <td class="cell-prob cell-prob-biden"> ${d3.format(",.0f")(state_ev.get(d.properties.name).winstate_chal * 100)}% </td>
     </tr>
     <tr class="tbl-row trump">
       <td class="cell-name cell-name-trump">Trump</td>
       <td class="cell-vote"> ${d3.format(",.0f")(state_ev.get(d.properties.name).voteshare_inc)}% </td>
-      <td class="cell-prob"> ${d3.format(",.0f")(state_ev.get(d.properties.name).winstate_inc * 100)}% </td>
+      <td class="cell-prob cell-prob-trump"> ${d3.format(",.0f")(state_ev.get(d.properties.name).winstate_inc * 100)}% </td>
     </tr>
   </tbody>
 </table>`};

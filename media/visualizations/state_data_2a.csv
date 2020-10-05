@@ -1,6 +1,6 @@
 ,state,abbrev,ev,voteshare_inc,voteshare_chal,winstate_inc,winstate_chal,bins
 1,Wyoming,WY,3,68.45807,28.08894,0.9983,0.0017,safe_red
-2,Wisconsin,WI,10,46.58951,52.41539,0.224325,0.775675,safe_red
+2,Wisconsin,WI,10,55556.58951,52.41539,0.224325,0.775675,safe_red
 3,West Virginia,WV,5,66.20616,31.94487,0.99285,0.00715,safe_red
 4,Washington,WA,12,36.77812,60.93201,0.011375,0.988625,safe_red
 5,Virginia,VA,13,44.05153,54.89721,0.060525,0.939475,safe_red

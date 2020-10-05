@@ -77,7 +77,7 @@
         .on("mouseout", function (event, d, i) {
           states.filter(data => (d.id == data.id)).attr("stroke", null).attr("stroke-width", 1).lower()
           bubbles.filter(data => (d.id == data.id))
-            .attr("stroke", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85 ? "rgba(0, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.7)"); })
+            .attr("stroke", function (d) { return "rgba(0, 0, 0, 0.3)"; })
             //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85 ? 1 : 2); })
             .attr("stroke-width", 1)
             .lower()
@@ -99,7 +99,7 @@
         .style("display", "none")
         .attr("class", "bubbles")
         .attr("fill", function (d) { return fillColor(state_ev.get(d.properties.name).winstate_chal); })
-        .attr("stroke", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85 ? "rgba(0, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.7)"); })
+        .attr("stroke", function (d) { return "rgba(0, 0, 0, 0.3)"; })
         //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85 ? 1 : 2); })
         .attr("stroke-width", 1)
         .attr("r", (d) => Math.sqrt(state_ev.get(d.properties.name).ev) * 5 + 3)
@@ -127,7 +127,7 @@
         })
         .on("mouseout", function (event, d, i) {
           bubbles.filter(data => (d.id == data.id))
-            .attr("stroke", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85 ? "rgba(0, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.7)"); })
+            .attr("stroke", function (d) { return "rgba(0, 0, 0, 0.3)"; })
             //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85 ? 1 : 2); })
             .attr("stroke-width", 1)
             .lower()
@@ -149,7 +149,7 @@
         .text((d) => state_ev.get(d.properties.name).abbrev)
         .filter(d => (eastCoastValues.includes(state_ev.get(d.properties.name).abbrev)) == false)
         .attr("class", "abbrevs")
-        .attr("stroke", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85 ? "rgba(0, 0, 0, 0.5)" : "rgba(0, 0, 0, 0.7)"); })
+        .attr("stroke", function (d) { return "rgba(0, 0, 0, 0.5)"; })
         .attr("x", (d) => path.centroid(d)[0] + ((state_ev.get(d.properties.name).abbrev in stateLabelOffset) ? stateLabelOffset[state_ev.get(d.properties.name).abbrev][0] : 0))
         .attr("y", (d) => path.centroid(d)[1] + ((state_ev.get(d.properties.name).abbrev in stateLabelOffset) ? stateLabelOffset[state_ev.get(d.properties.name).abbrev][1] : 0))
         // .filter((d) => (state_ev.get(d.properties.name).abbrev in eastCoastValues))
@@ -176,7 +176,7 @@
         .on("mouseout", function (event, d, i) {
           states.filter(data => (d.id == data.id)).attr("stroke", null).attr("stroke-width", 1).lower()
           bubbles.filter(data => (d.id == data.id))
-            .attr("stroke", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85 ? "rgba(0, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.7)"); })
+            .attr("stroke", function (d) { return "rgba(0, 0, 0, 0.3)"; })
             //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85 ? 1 : 2); })
             .attr("stroke-width", 1)
             .lower()
@@ -199,7 +199,7 @@
         .attr("class", "abbrevs")
         .attr("display", "none")
         .attr("stroke-width", 1)
-        .attr("stroke", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85 ? "rgba(0, 0, 0, 0.5)" : "rgba(0, 0, 0, 0.7)"); })
+        .attr("stroke", function (d) { return "rgba(0, 0, 0, 0.5)"; })
         .attr("x", (d) => path.centroid(d)[0] + ((state_ev.get(d.properties.name).abbrev in bubbleLabelOffset) ? bubbleLabelOffset[state_ev.get(d.properties.name).abbrev][0] : 0))
         .attr("y", (d) => path.centroid(d)[1] + ((state_ev.get(d.properties.name).abbrev in bubbleLabelOffset) ? bubbleLabelOffset[state_ev.get(d.properties.name).abbrev][1] : 0))
         .on("mouseover", function (event, d, i) {
@@ -222,7 +222,7 @@
         })
         .on("mouseout", function (event, d, i) {
           bubbles.filter(data => (d.id == data.id))
-            .attr("stroke", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85 ? "rgba(0, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.7)"); })
+            .attr("stroke", function (d) { return "rgba(0, 0, 0, 0.3)"; })
             //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85 ? 1 : 2); })
             .attr("stroke-width", 1)
             .lower()

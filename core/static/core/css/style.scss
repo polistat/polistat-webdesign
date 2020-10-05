@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
 
 @import 'vars.scss';
 @import 'map.scss';
@@ -18,7 +18,7 @@ body {
 	background: linear-gradient(108.09deg, rgba(27, 108, 229, 0.7) 0%, rgba(89, 91, 179, 0.7) 20.83%, rgba(202, 61, 89, 0.7) 80.21%, rgba(255, 46, 46, 0.7) 100%);
 }
 
-nav ul {
+nav ul.desktop {
 	background-color: white;
 	padding: 0;
 	margin: 0;
@@ -45,16 +45,101 @@ nav ul {
 		}
 	}
 
+	li.hamburger {
+		display: none;
+	}
+
 	li.active {
 		background: $gradient;
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
+	}
+
+	@media only screen and (max-width: 900px) {
+		li.nav-logo img {
+			height: 2rem;
+		}
+	}
+
+	@media only screen and (max-width: 750px) {
+		li {
+			display: none;
+		}
+
+		li.nav-logo, li.hamburger {
+			display: flex;
+		}
+	}
+}
+
+.mobile-nav {
+	z-index: 100;
+	background-color: white;
+	height: 100%;
+	position: fixed;
+	width: 14em;
+	right: -14em;
+	transition: right 0.2s ease-in;
+	top: 0;
+
+	header {
+		display: flex;
+		align-items: center;
+		padding-right: 1rem;
+		padding: 0.75rem 1rem;
+
+		h2 {
+			margin: 0 auto 0 0;
+			font-weight: 500;
+			height: 40px;
+			line-height: 40px;
+		}
+	}
+
+	ul.mobile {
+		padding: 0;
+		margin: 0;
+		list-style-type: none;
+
+		margin: 0 1em;
+
+		li {
+			font-weight: 500;
+			padding-top: 1em;
+			font-size: 1.2em;
+			margin-right: auto;
+		}
+
+		li.active span {
+			background: $gradient;
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+	}
+
+	img {
+		position: absolute;
+		bottom: 0;
+		width: calc(100% - 2em);
+		margin: 1em;
+	}
+
+	&.active {
+		box-shadow: $shadow;
+		header {
+			box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+		}
+		right: 0;
 	}
 }
 
 main {
 	display: grid;
 	margin: 2em;
+
+	@media only screen and (max-width: 900px) {
+		margin: 1em;
+	}
 
 	.sidebar {
 		grid-column: 1;
@@ -71,6 +156,10 @@ main {
 			width: 100%;
 			margin-bottom: 1.5em;
 		}
+
+		@media only screen and (max-width: 1200px) {
+			display: none;
+		}
 	}
 
 	.footer {
@@ -85,7 +174,9 @@ main {
 		h1, h3, p {
 			margin: 0;
 			span {
+				display: block;
 				font-size: 2em;
+				font-weight: 700;
 			}
 		}
 
@@ -96,6 +187,27 @@ main {
 		p {
 			font-size: 0.8em;
 			margin-top: 0.5em;
+		}
+
+		@media only screen and (max-width: 1200px) {
+			margin-top: 1.5em;
+			grid-column: 2;
+			grid-row: 2;
+			width: auto;
+
+			.footer-columns {
+				display: flex;
+				flex-direction: row;
+
+				div:first-child {
+					margin-right: 1em;
+				}
+
+				div {
+					flex-grow: 1;
+					flex-basis: 0;
+				}
+			}
 		}
 	}
 
@@ -118,6 +230,10 @@ main {
 
 		h1 {
 			font-weight: 500;
+		}
+
+		@media only screen and (max-width: 1200px) {
+			margin: 0;
 		}
 	}
 }

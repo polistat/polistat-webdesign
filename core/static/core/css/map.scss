@@ -90,24 +90,17 @@
     pointer-events: none;
   }
 
-  .toggles {
-    display: flex;
-    justify-content: center;
-  }
-
   .toggle {
     display: flex;
-
-    &:first-child {
-      padding-right: 2em;
-    }
+    justify-content: center;
+    margin-bottom: 1rem;
 
     button {
       font-weight: 700;
       border: 1px solid #c4c4c4;
       background: white;
       border-radius: 10px;
-      font-size: 1.5em;
+      font-size: 1.2em;
       cursor: pointer;
       padding: 1em 1em;
 
@@ -135,6 +128,17 @@
       &.map-toggle-swing-state.active {
         background-color: #e6e6e6;
       }
+    }
+  }
+
+  @media only screen and (min-width: 1400px) {
+    .toggles {
+      display: flex;
+      justify-content: center;
+    }
+
+    .toggle:first-child {
+      padding-right: 2em;
     }
   }
 }

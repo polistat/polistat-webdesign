@@ -22,16 +22,16 @@
       const stateLabelOffset = { MI: [15, 30], FL: [15, 5], CA: [0, 25], HI: [19, 18], LA: [-10, 0], KY: [15, 0], TN: [-5, 5], VA: [5, 0], NC: [15, 5] }
       const bubbleLabelOffset = { MI: [15, 30], FL: [15, 5], CA: [0, 25], HI: [19, 18], LA: [-10, 0], KY: [15, 0], TN: [-5, 5], VA: [5, 0], NC: [15, 5], VT: [-5, 0], NH: [5, -15], MA: [0, -10], RI: [5, 13], CT: [-10, 8], NJ: [-13, -2], PA: [-10, 0], MD: [0, 5], DE: [12, 5], DC: [20, 30]}
 
-      state_ev.forEach((value, key) => {
-        if (eastCoastValues.indexOf(value.abbrev) !== -1) {
-          eastCoast.set(key, value);
-        }
-        else {
-          console.log("bruh");
-        }
-      });
+      // state_ev.forEach((value, key) => {
+      //   if (eastCoastValues.indexOf(value.abbrev) !== -1) {
+      //     eastCoast.set(key, value);
+      //   }
+      //   else {
+      //     console.log("bruh");
+      //   }
+      // });
 
-      console.log(eastCoast);
+      // console.log(eastCoast);
 
       const width = 1000;
       const blockSize = 25;
@@ -54,7 +54,7 @@
           if (mode == "states")
             states.filter(data => (d.id == data.id)).attr("stroke", "black").attr("stroke-width", 3).raise();
           if (mode == "bubbles") {
-            // I have no idea why this isnt working
+            // I have no idea why this isnt working, but probably want the underlying state to get darker on hover when the map is in bubble mode
             states.filter(data => (d.id == data.id)).attr("fill", "orange");
             bubbles.filter(data => (d.id == data.id))
               .attr("stroke", "black")
@@ -87,7 +87,6 @@
           tooltip.style("display", "none");
         })
         .on("click", function (event) {
-          console.log("yo");
           // this is where we will make it redirect to the corresponding state page
         });
 
@@ -137,7 +136,6 @@
           tooltip.style("display", "none");
         })
         .on("click", function (event) {
-          console.log("yo");
           // this is where we will make it redirect to the corresponding state page
         });
 
@@ -186,7 +184,6 @@
           tooltip.style("display", "none");
         })
         .on("click", function (event) {
-          console.log("yo");
           // this is where we will make it redirect to the corresponding state page
         });
 

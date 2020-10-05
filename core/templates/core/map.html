@@ -365,20 +365,18 @@
 <table> 
   <thead class="header">
     <tr>
-      <th colspan="2">Candidate</th>
+      <th>Candidate</th>
       <th>Pred. Vote %</th>
       <th>Win Prob.</th>
     </tr>
   <thead>
   <tbody>
     <tr class="tbl-row biden">
-      <td class="cell-colorblock cell-colorblock-biden"></td>
       <td class="cell-name cell-name-biden">Biden</td>
       <td class="cell-vote"> ${d3.format(",.0f")(state_ev.get(d.properties.name).voteshare_chal)}% </td>
       <td class="cell-prob"> ${d3.format(",.0f")(state_ev.get(d.properties.name).winstate_chal * 100)}% </td>
     </tr>
     <tr class="tbl-row trump">
-      <td class="cell-colorblock cell-colorblock-trump"></td>
       <td class="cell-name cell-name-trump">Trump</td>
       <td class="cell-vote"> ${d3.format(",.0f")(state_ev.get(d.properties.name).voteshare_inc)}% </td>
       <td class="cell-prob"> ${d3.format(",.0f")(state_ev.get(d.properties.name).winstate_inc * 100)}% </td>

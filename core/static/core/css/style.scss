@@ -53,14 +53,14 @@ nav ul {
 }
 
 main {
-	display: flex;
-	flex-direction: row;
+	display: grid;
 	margin: 2em;
 
 	.sidebar {
+		grid-column: 1;
 		position: sticky;
 		top: 2rem;
-		max-width: 15em;
+		width: calc(15em - 3em);
 		background-color: white;
 		box-shadow: $shadow;
 		border-radius: 10px;
@@ -74,7 +74,8 @@ main {
 	}
 
 	.footer {
-		max-width: 15em;
+		grid-column: 3;
+		width: 15em;
 		color: white;
 		font-weight: 500;
 		justify-content: flex-end;
@@ -99,6 +100,7 @@ main {
 	}
 
 	.content {
+		grid-column: 2;
 		flex-grow: 1;
 		background-color: white;
 		box-shadow: $shadow;

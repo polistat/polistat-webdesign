@@ -7,4 +7,5 @@ urlpatterns = [
     #Front Page
     path('', views.index, name='index'),
     path('viz/', views.vizualization, name='vizualization'),
+    path('viz/trump/', views.vizualization2, name='vizualization2'),
 ]

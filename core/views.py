@@ -6,3 +6,5 @@ def index(request):
 
 def vizualization(request):
     return render(request,"core/State Map.html")
+def vizualization2(request):
+    return render(request,"core/State Map2.html")

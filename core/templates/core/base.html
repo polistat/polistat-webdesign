@@ -1,0 +1,31 @@
+{% load static %}
+{% load sass_tags %}
+
+<html>
+	<head>
+		<title>{% block title %}{% endblock %} | ORACLE of Blair</title>
+		<link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+		<link rel="stylesheet" href="{% sass_src 'core/css/style.scss' %}">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<nav>
+			<ul>
+				<li class="nav-logo"><img src="{% static 'core/image/nav.svg' %}"></li>
+				<li class="active">Home</li>
+				<li>Methodology</li>
+				<li>Blog</li>
+				<li>2018 Model</li>
+				<li>Twitter</li>
+			</ul>
+		</nav>
+		<main>
+			<div class="sidebar">{% include "core/sidebar.html" %}</div>
+			<div class="content">
+				{% block content %}
+				{% endblock %}
+			</div>
+			<div class="footer">{% include "core/footer.html" %}</div>
+		</main>
+	</body>
+</html>

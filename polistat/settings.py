@@ -31,6 +31,7 @@ ALLOWED_HOSTS = [os.environ["POLISTAT_ALLOWED_HOST"]]
 # Application definition
 
 INSTALLED_APPS = [
+    'sass_processor',
     'core.apps.CoreConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -125,3 +126,9 @@ STATIC_ROOT = os.path.join(BASE_DIR,"static/")
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,"media/")
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
+]

@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{state.name}}{% endblock %}
+
+{% block bodycolor %}{% if state.trump > state.biden %}
+body-red
+{%else%}
+body-blue
+{% endif %}{% endblock %}
+
+{% block content %}
+
+<h1><span class="red">{{state.name}}</span></h1>
+<hr>
+<p class="model-italic">Likely win for {% if state.trump > state.biden %}<span class="red">TRUMP</span>{%else%}<span class="blue">BIDEN</span>{% endif %}</p>
+<div style="position:relative;width:100%;height:200;display:block;margin-top:5px">
+
+<div style="position:absolute;left:0;top:0;width:100"><p class="model-italic">{{state.biden}}%<br><span class="blue">Biden</span></p></div>
+
+<div style="position:absolute;right:0;top:0;width:100;text-align:right"><p class="model-italic">{{state.trump}}%<br><span class="red">Trump</span></p></div>
+
+<div style="position:absolute;left:0;top:100;width:100"><p class="model-italic">{{state.bpi}}<br>BPI</p></div>
+
+<div style="position:absolute;right:0;top:100;width:100;text-align:right"><p class="model-italic">{{state.mean}}<br>Mean</p></div>
+
+</div>
+<hr>
+
+
+<h1>Recent Polls</h1>
+{% for e in state.polls.all %}
+<div style="position:relative;width:100%;height:100;border-top:1px solid gray">
+<div style="position:absolute;left:0;top:10;width:100"><p class="model-italic">{{e.percent_biden}}%<br><span class="blue">Biden</span></p></div>
+
+
+<div style="position:absolute;right:0;top:10;width:100;text-align:right"><p class="model-italic">{{e.percent_trump}}%<br><span class="red">Trump</span></p></div>
+<div style="position:absolute;left:0;top:65;width:100%"><p >{{e.pollster}} | {{e.pollType}} | MOE +/- {{e.moe}} | <a style="text-decoration:none" href="{{e.url}}">Website</a></p></div>
+
+
+</div>
+
+{% endfor %}
+<hr>
+<h1>{{state.name}} Profile</h1>
+
+<p>{{state.description}}</p>
+
+{% endblock %}

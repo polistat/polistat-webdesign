@@ -18,6 +18,14 @@ body {
 	background: linear-gradient(108.09deg, rgba(27, 108, 229, 0.7) 0%, rgba(89, 91, 179, 0.7) 20.83%, rgba(202, 61, 89, 0.7) 80.21%, rgba(255, 46, 46, 0.7) 100%);
 }
 
+.body-blue {
+	background: linear-gradient(108.09deg, rgba(27, 108, 229, 0.7) 0%, rgba(120, 157, 211, 0.7) 62.5%, rgba(120, 157, 211, 0.7) 100%);
+}
+
+.body-red {
+	background: linear-gradient(108.09deg, rgba(255, 46, 46, 0.7) 0%, rgba(255, 137, 137, 0.7) 100%);
+}
+
 nav ul.desktop {
 	background-color: white;
 	padding: 0;
@@ -243,6 +251,18 @@ h1.model-header {
 	margin: 0;
 	font-size: 3em;
 	text-align: center;
+
+	.red, .blue { font-weight: 700; }
+	.red { color: $red; }
+	.blue { color: $blue; }
+}
+
+p.model-italic {
+	text-transform: uppercase;
+	font-weight: 500;
+	font-style: italic;
+	margin: 0;
+	font-size: 2em;
 
 	.red, .blue { font-weight: 700; }
 	.red { color: $red; }

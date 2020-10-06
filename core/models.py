@@ -51,19 +51,19 @@ class State(models.Model):
         return self.name
 
 class StatePoll(models.Model):
-    state = models.ForeignKey(State,on_delete=models.CASCADE)
+    state = models.ForeignKey(State,on_delete=models.CASCADE,related_name='polls')
     start_date = models.DateField(default=timezone.now)
     end_date = models.DateField(default=timezone.now)
     percent_trump = models.FloatField()
     percent_biden = models.FloatField()
     n = models.FloatField()
-    pollType = models.FloatField()
+    pollType = models.CharField(max_length=2)
     pollster = models.CharField(max_length=200)
     moe = models.FloatField()
     url = models.TextField()
 
 class PreviousElection(models.Model):
-    state = models.ForeignKey(State,on_delete=models.CASCADE)
+    state = models.ForeignKey(State,on_delete=models.CASCADE,related_name='pastElections')
     year = models.IntegerField()
     percent_dems = models.FloatField()
     percent_reps = models.FloatField()
@@ -71,12 +71,12 @@ class PreviousElection(models.Model):
     rep_candidate = models.CharField(max_length=100)
 
 class Senator(models.Model):
-    state = models.ForeignKey(State,on_delete=models.CASCADE)
+    state = models.ForeignKey(State,on_delete=models.CASCADE,related_name='senators')
     name = models.CharField(blank=True,max_length=100)
     party = models.CharField(blank=True,max_length=100)
 
 class SenateElection(models.Model):
-    state = models.ForeignKey(State,on_delete=models.CASCADE)
+    state = models.ForeignKey(State,on_delete=models.CASCADE,related_name='senateElections')
     candidate1name = models.CharField(blank=True,max_length=100)
     candidate1party = models.CharField(blank=True,max_length=100)
     candidate1incumbent = models.BooleanField(default=False)
@@ -84,13 +84,13 @@ class SenateElection(models.Model):
     candidate2party = models.CharField(blank=True,max_length=100)
 
 class Representative(models.Model):
-    state = models.ForeignKey(State,on_delete=models.CASCADE)
+    state = models.ForeignKey(State,on_delete=models.CASCADE,related_name='representatives')
     district = models.IntegerField() #0 = AL
     name = models.CharField(blank=True,max_length=100)
     party = models.CharField(blank=True,max_length=100)
 
 class HouseElection(models.Model):
-    state = models.ForeignKey(State,on_delete=models.CASCADE)
+    state = models.ForeignKey(State,on_delete=models.CASCADE,related_name='houseElections')
     district = models.IntegerField() #0 = AL
     candidate1name = models.CharField(blank=True,max_length=100)
     candidate1party = models.CharField(blank=True,max_length=100)
@@ -99,7 +99,7 @@ class HouseElection(models.Model):
     candidate2party = models.CharField(blank=True,max_length=100)
 
 class Demographic(models.Model):
-    state = models.ForeignKey(State,on_delete=models.CASCADE)
+    state = models.ForeignKey(State,on_delete=models.CASCADE,related_name='demographics')
     key = models.CharField(max_length=100)
     value = models.FloatField(default=-1)
     important = models.BooleanField(default=False)

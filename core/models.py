@@ -52,7 +52,8 @@ class State(models.Model):
 
 class StatePoll(models.Model):
     state = models.ForeignKey(State,on_delete=models.CASCADE)
-    time = models.DateField(default=timezone.now)
+    start_date = models.DateField(default=timezone.now)
+    end_date = models.DateField(default=timezone.now)
     percent_trump = models.FloatField()
     percent_biden = models.FloatField()
     n = models.FloatField()

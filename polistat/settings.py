@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ["POLISTAT_SECRETKEY"]
+SECRET_KEY = os.environ.get("POLISTAT_SECRETKEY", "asdf")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [os.environ["POLISTAT_ALLOWED_HOST"]]
+ALLOWED_HOSTS = [os.environ.get("POLISTAT_ALLOWED_HOST", "127.0.0.1")]
 
 
 # Application definition

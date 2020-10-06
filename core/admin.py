@@ -1,6 +1,11 @@
 from django.contrib import admin
 from .models import *
 # Register your models here.
+
+class StatePollInline(admin.StackedInline):
+    model = StatePoll
+    extra=0
+    
 class PreviousElectionInline(admin.StackedInline):
     model = PreviousElection
     extra=0
@@ -27,7 +32,7 @@ class DemographicInline(admin.StackedInline):
 
 class StateAdmin(admin.ModelAdmin):
     inlines = [
-        PreviousElectionInline,SenatorInline,SenateElectionInline,RepresentativeInline,HouseElectionInline,DemographicInline
+        StatePollInline,PreviousElectionInline,SenatorInline,SenateElectionInline,RepresentativeInline,HouseElectionInline,DemographicInline
     ]
 
 admin.site.register(State,StateAdmin)

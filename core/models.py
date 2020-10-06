@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 PARTY_CHOICES = [("D","D"),("R","R"),("I","I")]
 MAIL_IN_CHOICES = [("Yes","Yes"),("No","No"),("Yes, with exceptions","Yes, with exceptions")]
 #Model to represent a state.
@@ -6,6 +7,12 @@ class State(models.Model):
     name = models.CharField(max_length=100)
     initials = models.CharField(max_length=2)
     #important_chars = models.TextField(blank=True)
+
+    mean = models.FloatField(default=0)
+    bpi = models.FloatField(default=0)
+    biden = models.FloatField(default=0)
+    trump = models.FloatField(default=0)
+    
     capital = models.CharField(max_length=200,default="not specified")
     other_areas = models.TextField(default="not specified")
     cost_voting = models.CharField(max_length=20,default="not specified")
@@ -42,6 +49,17 @@ class State(models.Model):
 
     def __str__(self):
         return self.name
+
+class StatePoll(models.Model):
+    state = models.ForeignKey(State,on_delete=models.CASCADE)
+    time = models.DateField(default=timezone.now)
+    percent_trump = models.FloatField()
+    percent_biden = models.FloatField()
+    n = models.FloatField()
+    pollType = models.FloatField()
+    pollster = models.CharField(max_length=200)
+    moe = models.FloatField()
+    url = models.TextField()
 
 class PreviousElection(models.Model):
     state = models.ForeignKey(State,on_delete=models.CASCADE)

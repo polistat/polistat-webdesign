@@ -12,11 +12,13 @@
 		<nav>
 			<ul class="desktop">
 				<li class="nav-logo"><img src="{% static 'core/image/nav.svg' %}"></li>
-				<li class="active">Home</li>
-				<li>Methodology</li>
-				<li>Blog</li>
-				<li>2018 Model</li>
-				<li>Twitter</li>
+				<li class="{% if request.path == '/' %}active{% endif %}"><a href="/">Home</a></li>
+				<li class="{% if request.path == '/methodology' %}active{% endif %}"><a href="/methodology">Methodology</a></li>
+				<li class="{% if request.path == '/blog' %}active{% endif %}"><a href="/blog">Blog</a></li>
+				<li><a href="https://2018.polistat.mbhs.edu">2018 Model</a></li>
+				<li><a href="https://twitter.com/ORACLE_of_Blair">
+					<object width=45 height=45 type="image/svg+xml" class="twitter" data="{% static 'core/image/twitter.svg' %}"></object>
+				</a></li>
 				<li class="hamburger" onclick="toggleNav()"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path fill-rule="evenodd" clip-rule="evenodd" d="M6.66667 13.3333C5.75 13.3333 5 12.5833 5 11.6667C5 10.75 5.75 10 6.66667 10H33.3333C34.25 10 35 10.75 35 11.6667C35 12.5833 34.25 13.3333 33.3333 13.3333H6.66667ZM6.66667 21.6666H33.3333C34.25 21.6666 35 20.9166 35 20C35 19.0833 34.25 18.3333 33.3333 18.3333H6.66667C5.75 18.3333 5 19.0833 5 20C5 20.9166 5.75 21.6666 6.66667 21.6666ZM6.66667 30H33.3333C34.25 30 35 29.25 35 28.3334C35 27.4167 34.25 26.6667 33.3333 26.6667H6.66667C5.75 26.6667 5 27.4167 5 28.3334C5 29.25 5.75 30 6.66667 30Z" fill="url(#paint0_linear)"/>
 					<defs>
@@ -41,11 +43,12 @@
 					</svg>
 				</header>
 				<ul class="mobile">
-					<li class="active"><span>Home</span></li>
-					<li><span>Methodology</span></li>
-					<li><span>Blog</span></li>
-					<li><span>2018 Model</span></li>
-					<li><span>Connect</span></li>
+					<li class="{% if request.path == '/' %}active{% endif %}"><a href="/">Home</a></li>
+					<li class="{% if request.path == '/methodology' %}active{% endif %}"><a href="/methodology">Methodology</a></li>
+					<li class="{% if request.path == '/blog' %}active{% endif %}"><a href="/blog">Blog</a></li>
+					<li><a href="https://2018.polistat.mbhs.edu">2018 Model</a></li>
+					<li><a href="https://twitter.com/ORACLE_of_Blair">Connect <object type="image/svg+xml" class="twitter" data="{% static 'core/image/twitter.svg' %}"></object>
+</a></li>
 				</ul>
 				<img src="{% static 'core/image/logo.svg' %}">
 			</div>

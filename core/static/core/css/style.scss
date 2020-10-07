@@ -26,6 +26,11 @@ body {
 	background: linear-gradient(108.09deg, rgba(255, 46, 46, 0.7) 0%, rgba(255, 137, 137, 0.7) 100%);
 }
 
+nav a {
+	text-decoration: none;
+	color: inherit;
+}
+
 nav ul.desktop {
 	background-color: white;
 	padding: 0;
@@ -55,6 +60,7 @@ nav ul.desktop {
 
 	li.hamburger {
 		display: none;
+		cursor: pointer;
 	}
 
 	li.active {
@@ -67,6 +73,8 @@ nav ul.desktop {
 		li.nav-logo img {
 			height: 2rem;
 		}
+
+		height: 40px;
 	}
 
 	@media only screen and (max-width: 750px) {
@@ -77,6 +85,11 @@ nav ul.desktop {
 		li.nav-logo, li.hamburger {
 			display: flex;
 		}
+	}
+
+	object.twitter {
+		height: 1.5em;
+		pointer-events: none;
 	}
 }
 
@@ -97,6 +110,10 @@ nav ul.desktop {
 		padding-right: 1rem;
 		padding: 0.75rem 1rem;
 		box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+
+		svg {
+			cursor: pointer;
+		}
 
 		h2 {
 			margin: 0 auto 0 0;
@@ -120,7 +137,7 @@ nav ul.desktop {
 			margin-right: auto;
 		}
 
-		li.active span {
+		li.active a {
 			background: $gradient;
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: transparent;
@@ -136,6 +153,19 @@ nav ul.desktop {
 
 	&.active {
 		right: 0;
+	}
+
+	object.twitter {
+		position: relative;
+		height: 1.25em;
+		vertical-align: bottom;
+		margin-left: 0.1em;
+		pointer-events: none;
+	}
+
+	display: none;
+	@media only screen and (max-width: 750px) {
+		display: block;
 	}
 }
 

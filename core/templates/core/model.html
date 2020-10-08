@@ -16,4 +16,37 @@
 
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pretium sit eget nam velit mauris vel nisl. Vitae nullam iaculis interdum aliquam. Netus mattis nunc nulla vestibulum mauris commodo. Interdum nisl sapien volutpat pulvinar est porttitor.</p>
 
+<hr>
+
+<h1>Histogram</h1>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pretium sit eget nam velit mauris vel nisl. Vitae nullam iaculis interdum aliquam. Netus mattis nunc nulla vestibulum mauris commodo. Interdum nisl sapien volutpat pulvinar est porttitor.</p>
+
+<hr>
+
+<div class="mobile-state-picker">
+	<h1>Take me to a state...</h1>
+	<form autocomplete="off"><div class="select"><select onchange="location.href = '/state/'+event.target.value">
+		<option value=""></option>
+		{% for state in states %}
+		<option value="{{ state.initials }}">{{ state.name }}</option>
+		{% endfor %}
+	</select></div></form>
+	<hr>
+</div>
+
+<h1>Recent blog posts</h1>
+
+<h2>Fishing for answers?</h2>
+
+<p>An in-depth look at the role of Nebraska's salmon population on election night.</p>
+
+<h2>In it for the long haul</h2>
+
+<p>The important, but not surprising, correlation between a state's relative dimensions and its electoral potential.</p>
+
+<h2>Beginner's guide to water polo or: how I stole the election</h2>
+
+<p>An autobiographical summary of the inner workings of a democracy&mdash;if you can even call it that.</p>
+
 {% endblock %}

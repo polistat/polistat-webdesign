@@ -1,9 +1,9 @@
 {% load static %}
 
-<div>
-	<img src="{% static 'core/image/logo.svg' %}">
-	<select>
-		<option class="placeholder">State</option>
-		<option>Maryland</option>
-	</select>
-</div>
+<img src="{% static 'core/image/logo.svg' %}">
+<form autocomplete="off"><div class="select"><select onchange="location.href = '/state/'+event.target.value">
+	<option value="../">National</option>
+	{% for s in states %}
+	<option {% if state and state.initials == s.initials %}selected {% endif %}value="{{ s.initials }}">{{ s.name }}</option>
+	{% endfor %}
+</select></div></form>

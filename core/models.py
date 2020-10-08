@@ -8,6 +8,8 @@ class State(models.Model):
     initials = models.CharField(max_length=2)
     #important_chars = models.TextField(blank=True)
 
+    mainnebraska = models.BooleanField(default=False)
+    
     mean = models.FloatField(default=0)
     bpi = models.FloatField(default=0)
     biden = models.FloatField(default=0)
@@ -50,6 +52,19 @@ class State(models.Model):
     def __str__(self):
         return self.name
 
+
+class Prediction(models.Model):
+    state = models.ForeignKey(State,on_delete=models.CASCADE,related_name='predictions')
+    percent_trump = models.FloatField()
+    percent_biden = models.FloatField()
+    timestamp = models.DateTimeField(default=timezone.now)
+
+class Prediction2(models.Model):
+    state = models.ForeignKey(State,on_delete=models.CASCADE,related_name='predictions2')
+    percent_trump = models.FloatField()
+    percent_biden = models.FloatField()
+    timestamp = models.DateTimeField(default=timezone.now)
+    
 class StatePoll(models.Model):
     state = models.ForeignKey(State,on_delete=models.CASCADE,related_name='polls')
     start_date = models.DateField(default=timezone.now)

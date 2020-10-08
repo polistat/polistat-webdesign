@@ -14,6 +14,9 @@ class State(models.Model):
     bpi = models.FloatField(default=0)
     biden = models.FloatField(default=0)
     trump = models.FloatField(default=0)
+
+    biden2 = models.FloatField(default=0)
+    trump2 = models.FloatField(default=0)
     
     capital = models.CharField(max_length=200,default="not specified")
     other_areas = models.TextField(default="not specified")

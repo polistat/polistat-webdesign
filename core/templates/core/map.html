@@ -297,6 +297,7 @@
   let bubbles;
   let stateLabels;
   let bubbleLabels;
+  let swingOnly = false;
   let mode = "states";
 
   const eastCoastValues = ["DC", "MD", "DE", "NJ", "CT", "RI", "MA", "VT", "NH"];
@@ -306,13 +307,12 @@
     for (let i = 0; i < buttons.length; i++) {
       buttons[i] === event.target ? buttons[i].classList.add('active') : buttons[i].classList.remove('active')
     }
-    event.target.classList.add('active')
     mode = "bubbles"
-    states.style("fill", "#e6e6e6")
-    bubbles.style("display", "block")
+    states.style("fill", "#e6e6e6");
+    (swingOnly ? bubbles.filter(d => !(state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85)) : bubbles).style("display", "block")
     stateLabels.style("display", "none")
-    bubbleLabels.style("display", "none")
-    bubbleLabels.filter(d => (state_ev.get(d.properties.name).ev > 5)).style("display", "block")
+    bubbleLabels.style("display", "none");
+    (swingOnly ? bubbleLabels.filter(d => !(state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85)) : bubbleLabels.filter(d => (state_ev.get(d.properties.name).ev > 5))).style("display", "block")
   };
   const toggleMapReverse = function () {
     let buttons = document.getElementsByClassName('map-toggle-shape')
@@ -321,12 +321,14 @@
     }
     mode = "states"
     states.style("fill", function (d) { return fillColor(state_ev.get(d.properties.name).winstate_chal); })
-    bubbles.style("display", "none")
-    stateLabels.filter(d => (eastCoastValues.includes(state_ev.get(d.properties.name).abbrev)) == false).style("display", "block")
+    if (swingOnly) states.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85)).style("fill", "#e6e6e6");
+    bubbles.style("display", "none");
+    (swingOnly ? stateLabels.filter(d => !(state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85)) :stateLabels).filter(d => (eastCoastValues.includes(state_ev.get(d.properties.name).abbrev)) == false).style("display", "block")
     bubbleLabels.style("display", "none")
   };
 
   const toggleSwingState = function () {
+    swingOnly = true;
     let buttons = document.getElementsByClassName('map-toggle-swing-state')
     for (let i = 0; i < buttons.length; i++) {
       buttons[i] === event.target ? buttons[i].classList.add('active') : buttons[i].classList.remove('active')
@@ -342,11 +344,11 @@
     }
   };
   const toggleSwingStateReverse = function (d) {
+    swingOnly = false;
     let buttons = document.getElementsByClassName('map-toggle-swing-state')
     for (let i = 0; i < buttons.length; i++) {
       buttons[i] === event.target ? buttons[i].classList.add('active') : buttons[i].classList.remove('active')
     }
-    event.target.classList.add('active')
     if (mode == "bubbles") {
       bubbles.style("display", "block")
       bubbleLabels.style("display", "none")

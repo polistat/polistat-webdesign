@@ -77,10 +77,10 @@ class StatePoll(models.Model):
     end_date = models.DateField(default=timezone.now)
     percent_trump = models.FloatField()
     percent_biden = models.FloatField()
-    n = models.FloatField()
+    n = models.FloatField(null=True, blank=True)
     pollType = models.CharField(max_length=2)
     pollster = models.CharField(max_length=200)
-    moe = models.FloatField()
+    moe = models.FloatField(null=True, blank=True)
     url = models.TextField()
 
 class PreviousElection(models.Model):

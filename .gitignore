@@ -3,3 +3,4 @@ polistat/__pycache__/*
 *.sqlite3
 ignored/*
 /static
+/media

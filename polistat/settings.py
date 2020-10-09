@@ -31,6 +31,7 @@ ALLOWED_HOSTS = [os.environ.get("POLISTAT_ALLOWED_HOST", "127.0.0.1")]
 # Application definition
 
 INSTALLED_APPS = [
+    'markdownx',
     'sass_processor',
     'core.apps.CoreConfig',
     'django.contrib.admin',

@@ -1,4 +1,7 @@
 from django.contrib import admin
+from markdownx.admin import MarkdownxModelAdmin
+from markdownx.widgets import AdminMarkdownxWidget
+
 from .models import *
 # Register your models here.
 
@@ -35,6 +38,11 @@ class StateAdmin(admin.ModelAdmin):
         StatePollInline,PreviousElectionInline,SenatorInline,SenateElectionInline,RepresentativeInline,HouseElectionInline,DemographicInline
     ]
 
+##class BlogpostAdmin(admin.ModelAdmin):
+##    formfield_overrides = {
+##        models.TextField: {'widget': AdminMarkdownxWidget},
+##    }
+
 admin.site.register(State,StateAdmin)
 admin.site.register(Tag)
-admin.site.register(Blogpost)
+admin.site.register(Blogpost,MarkdownxModelAdmin)

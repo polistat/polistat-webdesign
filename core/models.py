@@ -1,5 +1,8 @@
 from django.db import models
 from django.utils import timezone
+from markdownx.models import MarkdownxField
+
+
 PARTY_CHOICES = [("D","D"),("R","R"),("I","I")]
 MAIL_IN_CHOICES = [("Yes","Yes"),("No","No"),("Yes, with exceptions","Yes, with exceptions")]
 #Model to represent a state.
@@ -160,7 +163,7 @@ class Demographic(models.Model):
 #Blogpost Tag (or for anything else)
 class Tag(models.Model):
     name = models.CharField(max_length=100)
-    state = models.ForeignKey(State, null=True, on_delete=models.SET_NULL)
+    state = models.ForeignKey(State, null=True,blank=True, on_delete=models.SET_NULL)
     #If an article is tagged with a state, it should be visible in that state's
     #States and their tags should be created in bulk
     
@@ -168,5 +171,5 @@ class Tag(models.Model):
 class Blogpost(models.Model):
     title = models.CharField(max_length=500)
     description = models.TextField() #When it appears on the homepage/state profile
-    content = models.TextField() #Actual markdown content
-    tags = models.ManyToManyField(Tag)
+    content = MarkdownxField() #Actual markdown content
+    tags = models.ManyToManyField(Tag,blank=True)

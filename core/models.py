@@ -14,6 +14,7 @@ class State(models.Model):
     mainnebraska = models.BooleanField(default=False)
     
     mean = models.FloatField(default=0)
+    variance = models.FloatField(default=0)
     bpi = models.FloatField(default=0)
     biden = models.FloatField(default=0)
     trump = models.FloatField(default=0)
@@ -77,10 +78,10 @@ class StatePoll(models.Model):
     end_date = models.DateField(default=timezone.now)
     percent_trump = models.FloatField()
     percent_biden = models.FloatField()
-    n = models.FloatField(null=True, blank=True)
+    n = models.FloatField()
     pollType = models.CharField(max_length=2)
     pollster = models.CharField(max_length=200)
-    moe = models.FloatField(null=True, blank=True)
+    moe = models.FloatField()
     url = models.TextField()
 
 class PreviousElection(models.Model):

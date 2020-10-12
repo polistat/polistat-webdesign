@@ -63,18 +63,32 @@ class State(models.Model):
     def __str__(self):
         return self.name
 
+class NationalPrediction(models.Model):
+    rep_win = models.FloatField()
+    dem_win = models.FloatField()
+    timestamp = models.DateTimeField(default=timezone.now)
+    def __str__(self):
+        return str(self.timestamp) + " " + str(self.rep_win)+"%"
 
 class Prediction(models.Model):
     state = models.ForeignKey(State,on_delete=models.CASCADE,related_name='predictions')
     percent_trump = models.FloatField()
     percent_biden = models.FloatField()
+    mean = models.FloatField()
+    variance = models.FloatField()
     timestamp = models.DateTimeField(default=timezone.now)
+    def __str__(self):
+        return str(self.timestamp) + " " + self.state.name + " " + str(self.percent_trump)+"%"
 
 class Prediction2(models.Model):
     state = models.ForeignKey(State,on_delete=models.CASCADE,related_name='predictions2')
     percent_trump = models.FloatField()
     percent_biden = models.FloatField()
+    mean = models.FloatField()
+    variance = models.FloatField()
     timestamp = models.DateTimeField(default=timezone.now)
+    def __str__(self):
+        return str(self.timestamp) + " " + self.state.name + " " + str(self.percent_trump)+"%"
     
 class StatePoll(models.Model):
     state = models.ForeignKey(State,on_delete=models.CASCADE,related_name='polls')

@@ -1,6 +1,7 @@
 {% extends 'core/base.html' %}
+{% load static %}
 
-{% block title %}{{state.name}}{% endblock %}
+{% block title %}{{ state.name }}{% endblock %}
 
 {% block bodycolor %}{% if state.trump > state.biden %}
 body-red
@@ -10,39 +11,79 @@ body-blue
 
 {% block content %}
 
-<h1><span class="red">{{state.name}}</span></h1>
-<hr>
-<p class="model-italic">Likely win for {% if state.trump > state.biden %}<span class="red">TRUMP</span>{%else%}<span class="blue">BIDEN</span>{% endif %}</p>
-<div style="position:relative;width:100%;height:200;display:block;margin-top:5px">
-
-<div style="position:absolute;left:0;top:0;width:100"><p class="model-italic">{{state.biden}}%<br><span class="blue">Biden</span></p></div>
-
-<div style="position:absolute;right:0;top:0;width:100;text-align:right"><p class="model-italic">{{state.trump}}%<br><span class="red">Trump</span></p></div>
-
-<div style="position:absolute;left:0;top:100;width:100"><p class="model-italic">{{state.bpi}}<br>BPI</p></div>
-
-<div style="position:absolute;right:0;top:100;width:100;text-align:right"><p class="model-italic">{{state.mean}}<br>Mean</p></div>
-
+<div class="state-header">
+	<h1><span>{{ state.name }}</span> {{ state.electoral_votes }} votes</h1>
+	<hr>
 </div>
+
+<div class="state-result">
+	<div>
+		<h2 class="topline"><span class="candidate blue">Biden</span> is favored to win</h2>
+		<script>
+			function colorSVG() {
+				let paths = stateSVG.contentDocument.getElementsByTagName("path")
+				for (let i = 0; i < paths.length; i++) {
+					paths[i].style.fill = '#1B6CE5'
+					paths[i].style.textAlign = 'right'
+				}
+			}
+		</script>
+		<div>
+				<object id="stateSVG" type="image/svg+xml" data="{% static 'core/image/states/'|add:state.initials|add:'.svg' %}" onload="colorSVG()"></object><div class="stats">
+				<div class="bpi">
+					123
+				</div>
+				<label class="bpi">BPI</label>
+				<div class="avg">
+					+0.2
+				</div>
+				<label class="avg">Poll<br>Avg.</label>
+			</div>
+		</div>
+	</div>
+	<table>
+		<tr>
+			<th>Candidate</th>
+			<th>Predicted Vote %</th>
+			<th>Win Prob.</th>
+		</tr>
+		<tr class="trump">
+			<td>Donald Trump</td>
+			<td>{{ state.trump }}</td>
+			<td>{{ state.trump }}</td>
+		</tr>
+		<tr class="biden">
+			<td>Joe Biden</td>
+			<td>{{ state.biden }}</td>
+			<td>{{ state.biden }}</td>
+		</tr>
+	</table>
+</div>
+
 <hr>
 
+<h1>Time Series</h1>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pretium sit eget nam velit mauris vel nisl. Vitae nullam iaculis interdum aliquam. Netus mattis nunc nulla vestibulum mauris commodo. Interdum nisl sapien volutpat pulvinar est porttitor.</p>
+
+<hr>
+
+<h1>About {{ state.name }}</h1>
+
+<p>{{state.description}}</p>
+
+<hr>
 
 <h1>Recent Polls</h1>
 {% for e in state.polls.all %}
 <div style="position:relative;width:100%;height:100;border-top:1px solid gray">
-<div style="position:absolute;left:0;top:10;width:100"><p class="model-italic">{{e.percent_biden}}%<br><span class="blue">Biden</span></p></div>
-
-
-<div style="position:absolute;right:0;top:10;width:100;text-align:right"><p class="model-italic">{{e.percent_trump}}%<br><span class="red">Trump</span></p></div>
-<div style="position:absolute;left:0;top:65;width:100%"><p >{{e.pollster}} | {{e.pollType}} | MOE +/- {{e.moe}} | <a style="text-decoration:none" href="{{e.url}}">Website</a></p></div>
-
-
+	<div style="position:absolute;left:0;top:10;width:100"><p class="model-italic">{{e.percent_biden}}%<br><span class="blue">Biden</span></p></div>
+	<div style="position:absolute;right:0;top:10;width:100;text-align:right"><p class="model-italic">{{e.percent_trump}}%<br><span class="red">Trump</span></p></div>
+	<div style="position:absolute;left:0;top:65;width:100%"><p >{{e.pollster}} | {{e.pollType}} | MOE +/- {{e.moe}} | <a style="text-decoration:none" href="{{e.url}}">Website</a></p></div>
 </div>
-
 {% endfor %}
-<hr>
-<h1>{{state.name}} Profile</h1>
 
-<p>{{state.description}}</p>
+<small>Polls consist of LV and RV polls gathered by <a href="https://projects.fivethirtyeight.com/polls/president-general/">FiveThirtyEight</a>.</small>
+
 
 {% endblock %}

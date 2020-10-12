@@ -49,6 +49,12 @@
 					<li><a href="https://2018.polistat.mbhs.edu">2018 Model</a></li>
 					<li><a href="https://twitter.com/ORACLE_of_Blair">Connect <object type="image/svg+xml" class="twitter" data="{% static 'core/image/twitter.svg' %}"></object></a></li>
 				</ul>
+				<form autocomplete="off"><div class="select"><select onchange="location.href = '/state/'+event.target.value">
+					<option value="../">National</option>
+					{% for s in states %}
+					<option {% if state and state.initials == s.initials %}selected {% endif %}value="{{ s.initials }}">{{ s.name }}</option>
+					{% endfor %}
+				</select></div></form>
 				<img src="{% static 'core/image/logo.svg' %}">
 			</div>
 		</nav>

@@ -3,6 +3,7 @@ from .models import *
 from django.http import HttpResponse
 from markdown import markdown
 
+
 def index(request):
     return render(request, "core/model.html")
 
@@ -17,3 +18,6 @@ def state(request,initials):
 
 def blog(request,bid):
     return render(request,"core/blogpost.html",{"blogpost":get_object_or_404(Blogpost,pk=bid),"text":markdown(get_object_or_404(Blogpost,pk=bid).content)})
+
+def methods(request):
+    return render(request,"core/methods.html",{"methods":markdown(open("core/templates/core/methods.txt",encoding="utf-8").read(),extensions=["footnotes"])})

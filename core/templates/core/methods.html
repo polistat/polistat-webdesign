@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Methodology{% endblock %}
+
+
+{% block content %}
+
+<h1>Methodology</h1>
+<hr>
+
+<p>{% autoescape off %}{{methods}}{% endautoescape %}</p>
+
+{% endblock %}

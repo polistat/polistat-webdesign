@@ -149,6 +149,11 @@ class CorrelationMatrix(models.Model):
     # just store it as json
     matrix = models.TextField()
 
+
+class EVFrequencies(models.Model):
+    # just store it as json
+    frequencies = models.TextField()
+
 ##class District(models.Model):
 ##    name = models.CharField(max_length=500)
 ##    

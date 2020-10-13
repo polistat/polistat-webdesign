@@ -380,6 +380,52 @@ main {
 	}
 }
 
+.electoralbar {
+	display: flex;
+	width: 100%;
+	margin: 2em auto 2em auto;
+
+	.biden, .trump {
+		font-size: 3rem;
+		font-weight: 500;
+		text-align: center;
+		flex-basis: 0;
+
+		.votes {
+			margin-bottom: 0.2rem;
+			display: block;
+		}
+
+		label {
+			display: block;
+			margin-top: 0.5rem;
+			font-size: 1rem;
+		}
+
+		.bar {
+			height: 0.5em;
+		}
+	}
+
+	.biden {
+		color: $blue;
+	}
+
+	.trump {
+		color: $red;
+	}
+
+	.biden .bar {
+		background-color: rgba($blue, 0.5);
+		border-radius: 10px 0 0 10px;
+	}
+
+	.trump .bar {
+		background-color: rgba($red, 0.5);
+		border-radius: 0 10px 10px 0;
+	}
+}
+
 main .content h1.model-header {
 	text-transform: uppercase;
 	font-weight: 500;
@@ -862,4 +908,66 @@ main .content .mobile-votes {
 	padding-bottom: 0.5em;
 	margin-bottom: 0.5em;
 	border-bottom: 2px solid #e6e6e6;
+}
+
+#hwrapper {
+	width: 100%;
+	height: 25em;
+	margin-top: 4em;
+	margin-bottom: 3em;
+
+	#histogram {
+		height: 100%;
+		width: 100%;
+	}
+
+	#hbars {
+		display: flex;
+		height: 100%;
+		width: 100%;
+	}
+
+	#h270 {
+		height: 100% !important;
+		background-color: rgba(51, 51, 51, 0.35);
+		position: relative;
+
+		&:after {
+			content: "270";
+			position: absolute;
+			top: -1.4em;
+			left: 50%;
+			transform: translateX(-50%);
+			font-weight: 500;
+			color: rgba(51, 51, 51, 0.35);
+			font-size: 1.5em;
+		}
+	}
+
+	.hbar {
+		margin-top: auto;
+		flex-grow: 1;
+		flex-basis: 0;
+		background-color: rgba($blue, 0.5);
+		height: 50%;
+
+		&.trump {
+			background-color: rgba($red, 0.5);
+		}
+
+		position: relative;
+		&.trump:after {
+			color: $red;
+		}
+		&:after {
+			content: attr(data-label);
+			position: absolute;
+			bottom: -1.7em;
+			font-weight: 500;
+			color: $blue;
+			font-size: 1.5em;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+	}
 }

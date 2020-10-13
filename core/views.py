@@ -3,18 +3,22 @@ from .models import *
 from django.http import HttpResponse
 from markdown import markdown
 import json
-
+from django.db.models import Sum
 
 def index(request):
 	prediction = NationalPrediction.objects.latest('timestamp')
 	predictions = NationalPrediction.objects.order_by('timestamp').all()
 	tossups = State.objects.filter(trump__lt=55, biden__lt=55)
 	cd2tossups = State.objects.filter(trump2__gt=0, trump2__lt=55, biden2__lt=55)
-	print(cd2tossups)
+
+	trumpev = State.objects.filter(trump__gt=50).aggregate(Sum('electoral_votes'))['electoral_votes__sum'] + State.objects.filter(trump2__gt=50).count()
+	bidenev = State.objects.filter(biden__gt=50).aggregate(Sum('electoral_votes'))['electoral_votes__sum'] + State.objects.filter(biden2__gt=50).count()
+	assert (trumpev + bidenev) == 538
+
 	model = {}
 	for state in State.objects.all():
 		model[state.initials] = {"voteshare_inc": state.mean, "voteshare_chal": 1 - state.mean, "winstate_inc": state.trump, "winstate_chal": state.biden}
-	return render(request, "core/model.html", {"tossups": tossups, "cd2tossups": cd2tossups, "model": json.dumps(model), "prediction": prediction, "timeseries": {"biden": repr(list(map(lambda p: p.dem_win, predictions))), "trump": repr(list(map(lambda p: p.rep_win, predictions)))}})
+	return render(request, "core/model.html", {"frequencies": EVFrequencies.objects.get().frequencies, "trumpev": trumpev, "bidenev": bidenev, "tossups": tossups, "cd2tossups": cd2tossups, "model": json.dumps(model), "prediction": prediction, "timeseries": {"biden": repr(list(map(lambda p: p.dem_win, predictions))), "trump": repr(list(map(lambda p: p.rep_win, predictions)))}})
 
 def state(request,initials):
 	cd2 = False

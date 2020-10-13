@@ -26,7 +26,7 @@ def state(request,initials):
 	predictions = obj.predictions if not cd2 else obj.predictions2
 	bpi = obj.bpi if not cd2 else obj.bpi2
 	result = 'trump' if trump >= 55 else ('biden' if biden >= 55 else 'tossup')
-	return render(request, "core/state.html", {"trump": trump, "biden": biden, "bpi": bpi, "mean": mean, "CD2": cd2, "pollavg": ("+" if mean >= 50 else "")+"{:.1f}".format(mean - 50), "state": obj, "result": result, "trumpv": mean, "bidenv": 100-mean, "timeseries": {"biden": repr(list(map(lambda p: p.percent_biden, predictions.order_by('timestamp').all()))), "trump": repr(list(map(lambda p: p.percent_trump, predictions.order_by('timestamp').all())))}})
+	return render(request, "core/state.html", {"trump": trump, "biden": biden, "bpi": bpi, "mean": mean, "CD2": cd2, "pollavg": ("+" if mean >= 50 else "")+"{:.1f}".format(2*mean - 100), "state": obj, "result": result, "trumpv": mean, "bidenv": 100-mean, "timeseries": {"biden": repr(list(map(lambda p: p.percent_biden, predictions.order_by('timestamp').all()))), "trump": repr(list(map(lambda p: p.percent_trump, predictions.order_by('timestamp').all())))}})
 
 def blog(request,bid):
     return render(request,"core/blogpost.html",{"blogpost":get_object_or_404(Blogpost,pk=bid),"text":markdown(get_object_or_404(Blogpost,pk=bid).content)})

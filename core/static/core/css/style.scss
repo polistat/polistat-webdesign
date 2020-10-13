@@ -13,11 +13,12 @@
 }
 
 blockquote {
-	border-left: 1px solid black;
+	border-left: 2px solid #404040;
 	margin-left: 1em;
-	padding: 0.2em 0 0.2em 1em;
+	padding: 0.2em 1em 0.2em 1em;
+	margin-right: 2em;
 	color: #404040;
-	background-color: rgba(0, 0, 0, 0.1);
+	background: linear-gradient(90deg, rgba(27, 108, 229, 0.1) 0%, rgba(255, 46, 46, 0.1) 100%);
 }
 
 strong {
@@ -199,6 +200,12 @@ main {
 
 	@media only screen and (max-width: 900px) {
 		margin: 1em;
+
+		.katex-display {
+			width: calc(100vw - 4em - 4em);
+			overflow-x: auto;
+			overflow-y: hidden;
+		}
 	}
 
 	.sidebar {
@@ -292,7 +299,17 @@ main {
 		}
 
 		& > h1:first-child {
-			font-size: 2.5em;
+			font-size: 3em;
+			margin-top: 1rem;
+			margin-bottom: 2rem;
+
+			@media only screen and (max-width: 750px) {
+				font-size: 2em;
+			}
+		}
+
+		p {
+			line-height: 1.5;
 		}
 
 		@media only screen and (max-width: 1200px) {

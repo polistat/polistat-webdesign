@@ -19,7 +19,7 @@ Our model uses four factors to arrive at its predictions: Priors, Polls, Correla
 Understanding how Democratic or Republican each state has voted historically helps us predict how they’ll vote in the future. We found the Republican two-party vote percentage for each state in five previous elections: the 2008, 2012, and 2016 Presidential elections, and the 2014 and 2018 US House elections. For each election, we found the difference between the national two-party percentage and the state two-party percentage (i.e. how partisan the state was compared to the nation as a whole). We took a weighted average of these differences based on how representative we thought each election was using the following equation:
 ​
 
-> BPI = 0.5(2016 presidential difference) + 0.2(2012 presidential difference) + 0.2(2018 midterm difference) + 0.05(2014 midterm difference) + 0.05(2008 presidential difference)
+> BPI = 0.5 &times; (2016 presidential difference) + 0.2 &times; (2012 presidential difference) + 0.2 &times; (2018 midterm difference) + 0.05 &times; (2014 midterm difference) + 0.05 &times; (2008 presidential difference)
 ​
 
 This weighted average is our Blair Partisan Index (BPI), representing the bias toward Republicans in that state compared to their national standing. For example, if a state has a +5 BPI, then (disregarding polls, demographics, etc.) Republicans historically outperformed their national total by around 5% and Democrats underperformed their national total vote by around 5%. The resulting margin is actually double the BPI (e.g. if one candidate gets 5% more than the national average and the other gets 5% less, the margin between them is 10%).
@@ -41,7 +41,7 @@ Understanding how different demographics have voted in the past also helps us pr
 We took a linear regression between these statistics and the results of the 2016 Presidential Election and predicted the vote percentage of each state with the following equation:
 ​
 
-> Expected Trump Percentage Vote = 2.72(White Non-Hispanic) - 4.320(Non-Religious) - 4.47(College Degree) - 3.69(Urbanicity) + 48.261
+> Expected Trump Percentage Vote = 2.72 &times; (White Non-Hispanic) - 4.320 &times; (Non-Religious) - 4.47 &times; (College Degree) - 3.69 &times; (Urbanicity) + 48.261
 ​
 
 For each state, we obtained demographic data from the 2010 Census and plugged that into the equation. The resulting expected Trump vote is what we call the "demographic prior".
@@ -67,7 +67,7 @@ Based on the number of polls in a block, we calculated the mean in three differe
 
 Rather than using the margin of error provided by the pollster, we calculated the variance for each poll by combining the sampling variation with the percentage of voters who indicated they weren’t affiliated with either candidate:
 ​
-$$CombinedVariance = \sqrt{\frac{pq}{n}} + (\frac{1}{30} * (1 - (\%Trump + \%Biden)))^2$$
+$$varianceCombined = \sqrt{\frac{pq}{n}} + (\frac{1}{30} * (1 - (\%Trump + \%Biden)))^2$$
 
 Using the mean and combined variance for each block, starting with the earliest block, we conducted z-tests between consecutive blocks, with a significance level of \\(\alpha = 0.05\\). A significant difference between two consecutive blocks indicates a significant shift in the voting intentions of the population, in which case polls from previous blocks would be discarded from the model. Otherwise, the two consecutive blocks would be combined. Therefore, the final block used for prediction would include all polls after the last significant population shift.
 ​
@@ -82,15 +82,15 @@ By the end of this process, we’ll have one final block to use for prediction, 
 Once we determine the mean and variance for each state based on polls alone, we add more variance based on how easy it is to vote in that state and how close our predictions are to election day. We do this by adding a multiple of the Cost of Voting Index[^4] to each of the states as well as a multiple of the amount of days until election day, using the following equations:
 ​
 
-$$\frac{0.6(CoVI +2.06)}{100}$$
+$$\frac{0.6(CoVI +2.06)}{400}$$
 
-$$\frac{1}{400}* \sqrt{\frac{electionDate-currentDate}{7}}$$ 
+$$\frac{1}{1600} \sqrt{\frac{electionDate-currentDate}{7}}$$ 
 ​
 
 ## Combining Polls with BPI (Finding State Lean)
 We combined the means from the priors and the means from the polls using a weighted average. Depending on how many polls were used in the final block of the z-test method, the weight for the mean of the polls in each state was calculated using the following equation:
 
-$$\frac{1.92}{\pi}\arctan{(0.65*numPolls)}$$
+$$\frac{1.92}{\pi}\arctan{(0.65 \times numPolls)}$$
 ​
 The weight for the mean of the priors would be the complement[^5] of this equation. We will call this weighted average the state’s lean.
 ​
@@ -160,11 +160,11 @@ State C:
 The net effect of these states on each other would be:
 ​
 
-> For State A: (-0.03 * 0.8 - 0.04 * 0.1)/(0.8 + 0.1)
+> For State A: (-0.03 &times; 0.8 - 0.04 &times; 0.1)/(0.8 + 0.1)
 
-> For State B: (0.02 * 0.8 + 0.04 * 0.5)/(0.8 + 0.5)
+> For State B: (0.02 &times; 0.8 + 0.04 &times; 0.5)/(0.8 + 0.5)
 
-> For State C: (0.02 * 0.1 - 0.03 * 0.5)/(0.1 + 0.5)
+> For State C: (0.02 &times; 0.1 - 0.03 &times; 0.5)/(0.1 + 0.5)
 ​
 
 The correlation scheme for the entire model would be similar, using 53 states instead of only three states.
@@ -185,5 +185,5 @@ Each run of the model simulates the election one million times. The results for 
 [^2]: Defined as having a Bachelor's Degree or higher.
 [^3]: A statistical procedure that combines the results of multiple independent studies, using the **metafor** package in R
 [^4]: Obtained from [Election Law Journal: Rules, Politics, and Policy.](https://www.liebertpub.com/doi/full/10.1089/elj.2017.0478)
-[^5]: As in \\(1 - \frac{1.92}{\pi}\arctan{(0.65*numPolls)}\\)
+[^5]: As in \\(1 - \frac{1.92}{\pi} \cdot \arctan{(0.65 \cdot numPolls)}\\)
 [^6]: Defined as the square root of the combined variance.

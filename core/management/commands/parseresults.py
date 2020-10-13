@@ -29,7 +29,7 @@ def inUse(y,m,d):
     
 
 class Command(BaseCommand):
-     help = 'adds the polls from csv to model'
+     help = 'imports simulation results'
 ##     def add_arguments(self, parser):
 ##         # Correct for PATH TO CSV FILE
 ##         parser.add_argument('file_name', type=str)

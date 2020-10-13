@@ -8,11 +8,14 @@ import json
 def index(request):
 	prediction = NationalPrediction.objects.latest('timestamp')
 	predictions = NationalPrediction.objects.order_by('timestamp').all()
+	tossups = State.objects.filter(trump__lt=55, biden__lt=55)
+	cd2tossups = State.objects.filter(trump2__gt=0, trump2__lt=55, biden2__lt=55)
+	print(cd2tossups)
 	model = {}
 	for state in State.objects.all():
 		pred = state.predictions.latest('timestamp')
 		model[state.initials] = {"voteshare_inc": pred.mean, "voteshare_chal": 1 - pred.mean, "winstate_inc": state.trump, "winstate_chal": state.biden}
-	return render(request, "core/model.html", {"model": json.dumps(model), "prediction": prediction, "timeseries": {"biden": repr(list(map(lambda p: p.dem_win, predictions))), "trump": repr(list(map(lambda p: p.rep_win, predictions)))}})
+	return render(request, "core/model.html", {"tossups": tossups, "cd2tossups": cd2tossups, "model": json.dumps(model), "prediction": prediction, "timeseries": {"biden": repr(list(map(lambda p: p.dem_win, predictions))), "trump": repr(list(map(lambda p: p.rep_win, predictions)))}})
 
 def state(request,initials):
 	cd2 = False
@@ -26,7 +29,13 @@ def state(request,initials):
 	predictions = obj.predictions if not cd2 else obj.predictions2
 	bpi = obj.bpi if not cd2 else obj.bpi2
 	result = 'trump' if trump >= 55 else ('biden' if biden >= 55 else 'tossup')
-	return render(request, "core/state.html", {"trump": trump, "biden": biden, "bpi": bpi, "mean": mean, "CD2": cd2, "pollavg": ("+" if mean >= 50 else "")+"{:.1f}".format(2*mean - 100), "state": obj, "result": result, "trumpv": mean, "bidenv": 100-mean, "timeseries": {"biden": repr(list(map(lambda p: p.percent_biden, predictions.order_by('timestamp').all()))), "trump": repr(list(map(lambda p: p.percent_trump, predictions.order_by('timestamp').all())))}})
+
+	correlations = json.loads(CorrelationMatrix.objects.first().matrix)[obj.initials+("2" if cd2 else "")]
+	similarstates = list(map(lambda i: i[0], list(sorted(correlations.items(), key=lambda i: abs(i[1])))[1:5]))
+	similar = State.objects.filter(initials__in=similarstates)
+	cd2similar = State.objects.filter(initials__in=map(lambda i: i[:2], filter(lambda i: '2' in i, similarstates)))
+
+	return render(request, "core/state.html", {"similar": similar, "cd2similar": cd2similar, "trump": trump, "biden": biden, "bpi": bpi, "mean": mean, "CD2": cd2, "pollavg": ("+" if mean >= 50 else "")+"{:.1f}".format(2*mean - 100), "state": obj, "result": result, "trumpv": mean, "bidenv": 100-mean, "timeseries": {"biden": repr(list(map(lambda p: p.percent_biden, predictions.order_by('timestamp').all()))), "trump": repr(list(map(lambda p: p.percent_trump, predictions.order_by('timestamp').all())))}})
 
 def blog(request,bid):
     return render(request,"core/blogpost.html",{"blogpost":get_object_or_404(Blogpost,pk=bid),"text":markdown(get_object_or_404(Blogpost,pk=bid).content)})

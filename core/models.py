@@ -145,6 +145,10 @@ class Demographic(models.Model):
     value = models.FloatField(default=-1)
     important = models.BooleanField(default=False)
 
+class CorrelationMatrix(models.Model):
+    # just store it as json
+    matrix = models.TextField()
+
 ##class District(models.Model):
 ##    name = models.CharField(max_length=500)
 ##    

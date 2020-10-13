@@ -25,9 +25,15 @@ body-blue
 			const fillColor = d3.scaleLinear().domain([0, 0.5, 1]).range(["#EF3D3D", "#e6e6e6", "#1B6CE5"])
 			function colorSVG() {
 				let paths = stateSVG.contentDocument.getElementsByTagName("path")
+				stateSVG.contentDocument.getElementsByTagName('svg')[0].viewBox.baseVal.x -= stateSVG.contentDocument.getElementsByTagName('svg')[0].viewBox.baseVal.width * 0.02
+				stateSVG.contentDocument.getElementsByTagName('svg')[0].viewBox.baseVal.width *= 1.04
+				stateSVG.contentDocument.getElementsByTagName('svg')[0].viewBox.baseVal.y -= stateSVG.contentDocument.getElementsByTagName('svg')[0].viewBox.baseVal.height * 0.02
+				stateSVG.contentDocument.getElementsByTagName('svg')[0].viewBox.baseVal.height *= 1.04
 				for (let i = 0; i < paths.length; i++) {
 					paths[i].style.fill = fillColor({{ biden }}/100)
 					paths[i].style.textAlign = 'right'
+					paths[i].style.stroke = 'black'
+					paths[i].style.strokeWidth = 0.02*stateSVG.contentDocument.getElementsByTagName('svg')[0].viewBox.baseVal.height+'px'
 				}
 			}
 		</script>
@@ -88,15 +94,43 @@ body-blue
 
 <hr>
 
+<div class="state-picker">
+	<script>
+	function colorState(id, biden) {
+		let paths = document.getElementById(id).contentDocument.getElementsByTagName("path")
+		document.getElementById(id).contentDocument.getElementsByTagName('svg')[0].viewBox.baseVal.x -= document.getElementById(id).contentDocument.getElementsByTagName('svg')[0].viewBox.baseVal.width * 0.02
+		document.getElementById(id).contentDocument.getElementsByTagName('svg')[0].viewBox.baseVal.width *= 1.04
+		document.getElementById(id).contentDocument.getElementsByTagName('svg')[0].viewBox.baseVal.y -= document.getElementById(id).contentDocument.getElementsByTagName('svg')[0].viewBox.baseVal.height * 0.02
+		document.getElementById(id).contentDocument.getElementsByTagName('svg')[0].viewBox.baseVal.height *= 1.04
+		for (let i = 0; i < paths.length; i++) {
+			paths[i].style.fill = fillColor(biden/100)
+			paths[i].style.stroke = 'black'
+			paths[i].style.strokeWidth = 0.02*document.getElementById(id).contentDocument.getElementsByTagName('svg')[0].viewBox.baseVal.height+'px'
+			paths[i].style.textAlign = 'right'
+			paths[i].style.cursor = 'pointer'
+		}
+	};
+	</script>
+	<h1>Demographically similar states</h1>
+	<div class="state-collection">
+		{% for state in similar %}
+			<a href="/state/{{ state.initials }}/"><object id="{{ state.initials }}" type="image/svg+xml" data="{% static 'core/image/states/'|add:state.initials|add:'.svg' %}" onload="colorState('{{ state.initials }}', {{ state.biden }})"></object></a>
+		{% endfor %}
+		{% for state in cd2similar %}
+			<a href="/state/{{ state.initials }}2/"><object id="{{ state.initials }}2" type="image/svg+xml" data="{% static 'core/image/states/'|add:state.initials|add:'.svg' %}" onload="colorState('{{ state.initials }}2', {{ state.biden2 }})"></object></a>
+		{% endfor %}
+	</div>
+	<div>
+		<h1 class="picker">All states</h1>
+		{% include 'core/stateselect.html' %}
+	</div>
+</div>
+
+<hr>
+
 <h1>About {{ state.name }}</h1>
 
 <p>{{state.description}}</p>
-
-<div class="mobile-state-picker">
-	<hr>
-	<h1>Take me to a state:</h1>
-	{% include 'core/stateselect.html' %}
-</div>
 
 <!--<hr>
 

@@ -195,19 +195,37 @@ nav ul.desktop {
 	}
 }
 
-div.mobile-state-picker {
-	display: none;
+div.state-picker {
+	.state-collection {
+		margin-top: 3em;
+		display: flex;
+		justify-content: space-around;
+		flex-wrap: wrap;
+		a {
+			display: flex;
+			transition: transform 0.1s;
+			margin: 0 2em 2em 2em;
+
+			&:hover {
+				transform: scale(1.1) rotate(10deg);
+			}
+		}
+		object {
+			pointer-events: none;
+			width: 10em;
+			max-height: 10em;
+		}
+	}
+
+	h1.picker, form {
+		display: none;
+	}
 	@media only screen and (max-width: 1200px) {
-		display: block;
-		& > h1, & > form {
-			display: inline-block;
+		h1.picker, form {
+			display: block;
 			vertical-align: middle;
 		}
-		& > h1 {
-			margin: 0;
-			margin-right: 0.3em;
-		}
-		& > form {
+		form {
 			font-size: 1.2em;
 		}
 	}

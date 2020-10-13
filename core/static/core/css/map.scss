@@ -93,6 +93,10 @@
     pointer-events: none;
   }
 
+  .toggles {
+    margin-bottom: 1.5rem;
+  }
+
   .toggle {
     display: flex;
     justify-content: center;
@@ -103,7 +107,7 @@
       border: 1px solid #c4c4c4;
       background: white;
       border-radius: 10px;
-      font-size: 1.2em;
+      font-size: 1em;
       cursor: pointer;
       padding: 1em 1em;
 
@@ -138,6 +142,10 @@
     .toggles {
       display: flex;
       justify-content: center;
+
+      button {
+        font-size: 1.2em;
+      }
     }
 
     .toggle:first-child {

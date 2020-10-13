@@ -41,7 +41,7 @@ Understanding how different demographics have voted in the past also helps us pr
 We took a linear regression between these statistics and the results of the 2016 Presidential Election and predicted the vote percentage of each state with the following equation:
 ​
 
-> Expected Trump Percentage Vote = 2.72 * WhiteNonHispanic - 4.320 * NonReligious - 4.47 * CollegeDegree - 3.69 * Urbanicity + 48.261
+> Expected Trump Percentage Vote = 2.72(White Non-Hispanic) - 4.320(Non-Religious) - 4.47(College Degree) - 3.69(Urbanicity) + 48.261
 ​
 
 For each state, we obtained demographic data from the 2010 Census and plugged that into the equation. The resulting expected Trump vote is what we call the "demographic prior".

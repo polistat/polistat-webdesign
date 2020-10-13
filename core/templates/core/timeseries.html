@@ -18,6 +18,10 @@
 				<stop stop-color="#1B6CE5"/>
 				<stop offset="1" stop-color="#FF2E2E"/>
 			</linearGradient>
+			<linearGradient id="flipped_gradient" x1="-0.497355" y1="2.17398e-08" x2="-0.497573" y2="378" gradientUnits="userSpaceOnUse">
+				<stop stop-color="#FF2E2E"/>
+				<stop offset="1" stop-color="#1B6CE5"/>
+			</linearGradient>
 		</defs>
 	</svg>
 	<div id="xAxis"></div>
@@ -69,6 +73,10 @@ function draw() {
 	dateline.setAttributeNS(null, 'x2', Math.max(3, day*(width / days)))
 	dateline.setAttributeNS(null, 'y1', 3)
 	dateline.setAttributeNS(null, 'y2', height+10)
+
+	if (trump[day] > biden[day]) {
+		dateline.classList.add('flipped')
+	} else dateline.classList.remove('flipped')
 
 	endlabel.style.left = Math.round(endline.getBoundingClientRect().x + window.scrollX - endlabel.offsetWidth/2, 3)+'px'
 	endlabel.style.top = Math.round(endline.getBoundingClientRect().y + window.scrollY - endlabel.offsetHeight, 3)+'px'

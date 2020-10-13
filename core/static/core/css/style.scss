@@ -696,6 +696,10 @@ main .content .state-result {
 				stroke: url(#oracle_gradient);
 				stroke-opacity: 0.5;
 			}
+
+			&.dateline.flipped {
+				stroke: url(#flipped_gradient);
+			}
 		}
 
 		.bidencircle {

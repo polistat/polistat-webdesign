@@ -12,7 +12,7 @@ body-blue
 {% block content %}
 
 <div class="state-header">
-	<h1><span>{{ state.name }}{% if state.initials == 'NE' %}{% if CD2 %} CD-2{% endif %}{% elif state.initials == 'ME' %}{% if CD2 %} CD-2{% endif %}{% endif %}</span> {% if state.initials == 'NE' %}{% if CD2 %}1 vote{% else %}4 votes{% endif %}{% elif state.initials == 'ME' %}{% if CD2 %}1 vote{% else %}3 votes{% endif %}{% else %}{{ state.electoral_votes }} votes{% endif %}</h1>
+	<h1><span class="name">{{ state.name }}{% if state.initials == 'NE' %}{% if CD2 %} CD-2{% endif %}{% elif state.initials == 'ME' %}{% if CD2 %} CD-2{% endif %}{% endif %}</span> <span class="votes">{% if state.initials == 'NE' %}{% if CD2 %}1 vote{% else %}4 votes{% endif %}{% elif state.initials == 'ME' %}{% if CD2 %}1 vote{% else %}3 votes{% endif %}{% else %}{{ state.electoral_votes }} votes{% endif %}</span></h1>
 	<hr>
 </div>
 
@@ -21,6 +21,26 @@ body-blue
 		{% if result != 'tossup' %}<h2 class="topline"><span class="candidate {% if result == 'trump' %}red{% else %}blue{% endif %}">{% if result == 'trump' %}Trump{% else %}Biden{% endif %}</span> is favored to win</h2>
 		{% else %}<h2 class="topline">We've got a<span class="candidate tossup">tossup</span></h2>
 		{% endif %}
+		<div class="mobile-wins">
+			<div class="trump">
+				{{ trump|floatformat:"0" }}%
+				<label>Trump wins</label>
+			</div>
+			<div class="biden">
+				{{ biden|floatformat:"0" }}%
+				<label>Biden wins</label>
+			</div>
+		</div>
+		<div class="mobile-votes">
+			<div class="trump">
+				{{ trumpv|floatformat }}%
+				<label>Pred. vote</label>
+			</div>
+			<div class="biden">
+				{{ bidenv|floatformat }}%
+				<label>Pred. vote</label>
+			</div>
+		</div>
 		<script>
 			const fillColor = d3.scaleLinear().domain([0, 0.5, 1]).range(["#EF3D3D", "#e6e6e6", "#1B6CE5"])
 			function colorSVG() {
@@ -37,7 +57,7 @@ body-blue
 				}
 			}
 		</script>
-		<div>
+		<div class="state-stats">
 			<object id="stateSVG" type="image/svg+xml" data="{% static 'core/image/states/'|add:state.initials|add:'.svg' %}" onload="colorSVG()"></object>
 			<div class="stats">
 				<div class="bpi">
@@ -132,18 +152,21 @@ body-blue
 	</div>
 </div>
 
-<!--<hr>
-
-<h1>Recent Polls</h1>
-{% for e in state.polls.all %}
-<div style="position:relative;width:100%;height:100;border-top:1px solid gray">
-	<div style="position:absolute;left:0;top:10;width:100"><p class="model-italic">{{e.percent_biden}}%<br><span class="blue">Biden</span></p></div>
-	<div style="position:absolute;right:0;top:10;width:100;text-align:right"><p class="model-italic">{{e.percent_trump}}%<br><span class="red">Trump</span></p></div>
-	<div style="position:absolute;left:0;top:65;width:100%"><p >{{e.pollster}} | {{e.pollType}} | MOE +/- {{e.moe}} | <a style="text-decoration:none" href="{{e.url}}">Website</a></p></div>
-</div>
-{% endfor %}
-
-<small>Polls consist of LV and RV polls gathered by <a href="https://projects.fivethirtyeight.com/polls/president-general/">FiveThirtyEight</a>.</small>
--->
+{% if state.polls.all %}
+	<hr>
+	<h1>Recent polls</h1>
+	{% for poll in state.polls.all %}
+	{% if poll.cd2 == CD2 %}
+	<div class="poll">
+		<div class="poll-info"><a href="{{ poll.url }}">{{ poll.pollster }}</a><span><span class="poll-type">{{ poll.pollType|upper }}</span> <span class="poll-date">{{ poll.end_date|date:"n/j" }}</span></span></div>
+		<div class="poll-results">
+			<span>Biden <span class="blue">{{ poll.percent_biden }}%</span></span>
+			<span>Trump <span class="red">{{ poll.percent_trump }}%</span></span>
+		</div>
+	</div>
+	{% endif %}
+	{% endfor %}
+	<small>Polls consist of LV and RV polls ranked C and above gathered by <a href="https://projects.fivethirtyeight.com/polls/president-general/">FiveThirtyEight</a>.</small>
+{% endif %}
 
 {% endblock %}

@@ -61,6 +61,10 @@ nav ul.desktop {
 
 	li.nav-logo {
 		margin-right: auto;
+		img {
+			display: inline;
+			vertical-align: middle;
+		}
 	}
 
 	li {
@@ -105,6 +109,7 @@ nav ul.desktop {
 	}
 
 	object.twitter {
+		margin-top: 0.3em;
 		height: 1.5em;
 		pointer-events: none;
 	}
@@ -238,6 +243,7 @@ main {
 
 	@media only screen and (max-width: 900px) {
 		margin: 1em;
+		display: block;
 
 		.katex-display {
 			width: calc(100vw - 4em - 4em);
@@ -342,7 +348,9 @@ main {
 			margin-bottom: 2rem;
 
 			@media only screen and (max-width: 750px) {
-				font-size: 2em;
+				&, &.model-header {
+					font-size: 2em;
+				}
 			}
 		}
 
@@ -387,6 +395,7 @@ p.model-updated {
 	color: #AAAAAA;
 	font-weight: 500;
 	margin-bottom: 0;
+	margin-top: 0.5em;
 }
 
 div.select {
@@ -422,15 +431,19 @@ form {
 main .content .state-header {
 	h1 {
 		display: flex;
+		flex-wrap: wrap;
 		margin-top: 1rem;
 		margin-bottom: 2rem;
 		font-size: 2em;
 		font-weight: 300;
 		line-height: 1.1;
-		white-space: nowrap;
 		align-items: baseline;
 
 		span {
+			white-space: nowrap;
+		}
+
+		span.name {
 			font-size: 1.5em;
 			font-weight: 500;
 			margin-right: auto;
@@ -440,8 +453,11 @@ main .content .state-header {
 
 		@media only screen and (max-width: 750px) {
 			font-size: 1.5em;
-			span {
+			span.name {
 				font-size: 1.4em;
+			}
+			span.votes {
+				margin-top: 0.2em;
 			}
 		}
 	}
@@ -525,7 +541,7 @@ main .content .state-result {
 			}
 		}
 
-		& > div {
+		& > div.state-stats {
 			display: flex;
 			white-space: nowrap;
 			margin-left: auto;
@@ -583,13 +599,22 @@ main .content .state-result {
 			display: block;
 
 			.topline {
-				font-size: 2em;
+				font-size: 7vw;
 			}
 
-			& > div {
+			& > div.state-stats {
 				margin-top: 1.5em;
-				display: grid;
-				grid-template-columns: 1fr 1fr;
+				display: block;
+				white-space: normal;
+				text-align: center;
+				object {
+					display: inline-block;
+					vertical-align: middle;
+				}
+				.stats {
+					display: inline-grid;
+					vertical-align: middle;
+				}
 			}
 
 			object {
@@ -605,6 +630,42 @@ main .content .state-result {
 		}
 	}
 }
+
+main .content .mobile-wins, main .content .mobile-votes {
+	display: none;
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+	flex-direction: row;
+	font-style: italic;
+	font-weight: 500;
+	.biden {
+		text-align: right;
+		color: $blue;
+	}
+	.trump {
+		color: $red;
+	}
+	div {
+		flex-grow: 1;
+		font-size: 10vw;
+	}
+	label {
+		font-size: 1.2rem;
+		text-transform: uppercase;
+		display: block;
+		color: black;
+	}
+	@media only screen and (max-width: 750px) {
+		display: flex;
+	}
+}
+
+main .content .mobile-votes {
+	.biden, .trump {
+		color: black;
+	}
+}
+
 
 #chart {
 	display: grid;
@@ -745,11 +806,44 @@ main .content .state-result {
 	-webkit-text-fill-color: transparent;
 }
 
-#histogram {
-	width: 100%;
-	height: 25em;
-}
+.poll {
+	font-size: 1.5em;
+	.poll-info {
+		a { color: black; }
+		display: flex;
+		justify-content: space-between;
+		font-weight: 500;
+		margin-bottom: 0.5em;
+		.poll-date {
+			color: #8B8B8B;
+			margin-left: 0.5em;
+		}
+		& > span {
+			text-align: right;
+		}
+	}
 
-#hxAxis {
-	width: 100%;
+	.poll-results {
+		& > span:first-child {
+			display: inline-block;
+			padding-right: 1em;
+			min-width: 6.5em;
+		}
+
+		& > span {
+			white-space: nowrap;
+		}
+
+		span.blue {
+			color: $blue;
+		}
+		span.red {
+			color: $red;
+		}
+		font-weight: 700;
+	}
+
+	padding-bottom: 0.5em;
+	margin-bottom: 0.5em;
+	border-bottom: 2px solid #e6e6e6;
 }

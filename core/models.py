@@ -93,6 +93,7 @@ class Prediction2(models.Model):
     
 class StatePoll(models.Model):
     state = models.ForeignKey(State,on_delete=models.CASCADE,related_name='polls')
+    cd2 = models.BooleanField(default=False)
     start_date = models.DateField(default=timezone.now)
     end_date = models.DateField(default=timezone.now)
     percent_trump = models.FloatField()
@@ -100,7 +101,6 @@ class StatePoll(models.Model):
     n = models.FloatField()
     pollType = models.CharField(max_length=2)
     pollster = models.CharField(max_length=200)
-    moe = models.FloatField()
     url = models.TextField()
 
 class PreviousElection(models.Model):

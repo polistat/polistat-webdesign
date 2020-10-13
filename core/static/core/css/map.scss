@@ -8,7 +8,12 @@
     max-height: 75vh;
   }
 
+  text {
+    display: none;
+  }
+
   .abbrevs {
+    display: block;
     fill: white;
     text-anchor: middle;
     font-size: 14px;

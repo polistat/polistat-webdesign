@@ -230,7 +230,6 @@
           tooltip.style("display", "none");
         })
         .on("click", function (event) {
-          console.log("yo");
           // this is where we will make it redirect to the corresponding state page
         });
 
@@ -251,7 +250,6 @@
           // tooltip.style("display", "block");
           // let node = tooltip.node();
           // node.innerHTML = tooltipContent(d, state_ev);
-          console.log("hi");
         })
         .on("mousemove", function (event, d) {
           // let measuredWidth = tooltip.node().getBoundingClientRect().width
@@ -264,7 +262,6 @@
           // tooltip.style("display", "none");
         })
         .on("click", function (event) {
-          console.log("yo");
         });
 
     });
@@ -286,7 +283,6 @@
       { title: "State Predictions" }
     );
     initialize_map(state_ev);
-    console.log(state_ev.values());
   })
 
   const fillColor = d3.scaleLinear()

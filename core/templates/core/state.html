@@ -44,6 +44,18 @@ body-blue
 				<label class="avg">Poll<br>Avg.</label>
 			</div>
 		</div>
+		<script>
+		let aspectRatio;
+		stateSVG.addEventListener('load', function () {
+			aspectRatio = stateSVG.offsetWidth/stateSVG.offsetHeight
+			stateSVG.style.height = document.getElementsByClassName('topline')[0].offsetHeight+'px'
+			stateSVG.style.width = document.getElementsByClassName('topline')[0].offsetHeight*aspectRatio+'px'
+			window.addEventListener('resize', function () {
+				stateSVG.style.height = document.getElementsByClassName('topline')[0].offsetHeight+'px'
+				stateSVG.style.width = document.getElementsByClassName('topline')[0].offsetHeight*aspectRatio+'px'
+			})
+		})
+		</script>
 	</div>
 	<table>
 		<tr>

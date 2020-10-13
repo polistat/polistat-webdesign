@@ -471,15 +471,14 @@ main .content .state-result {
 		}
 
 		& > div {
-			display: block;
-			text-align: right;
-			flex-grow: 1;
+			display: flex;
 			white-space: nowrap;
+			margin-left: auto;
 		}
 
 		object {
 			display: inline-block;
-			height: 100%;
+			width: auto;
 			margin: 0 2rem;
 		}
 

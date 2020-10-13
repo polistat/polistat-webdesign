@@ -57,7 +57,7 @@ function draw() {
 
 	let labels = document.getElementsByClassName("xlabel")
 	for (let i = 0; i < labelDates.length; i++) {
-		labels[i].style.left = labelDates[i]*(width / days) - labels[i].offsetWidth/2
+		labels[i].style.left = (labelDates[i]*(width / days) - labels[i].offsetWidth/2)+'px'
 	}
 
 	endline.setAttributeNS(null, 'x1', width-3)
@@ -70,12 +70,12 @@ function draw() {
 	dateline.setAttributeNS(null, 'y1', 3)
 	dateline.setAttributeNS(null, 'y2', height+10)
 
-	endlabel.style.left = Math.round(endline.getBoundingClientRect().x + window.scrollX - endlabel.offsetWidth/2, 3)
-	endlabel.style.top = Math.round(endline.getBoundingClientRect().y + window.scrollY - endlabel.offsetHeight, 3)
+	endlabel.style.left = Math.round(endline.getBoundingClientRect().x + window.scrollX - endlabel.offsetWidth/2, 3)+'px'
+	endlabel.style.top = Math.round(endline.getBoundingClientRect().y + window.scrollY - endlabel.offsetHeight, 3)+'px'
 
 	datelabel.innerText = datestring(new Date((+new Date(start)) + day*24*60*60*1000))
-	datelabel.style.left = Math.max(timeseries.getBoundingClientRect().x + window.scrollX, Math.round(dateline.getBoundingClientRect().x + window.scrollX - datelabel.offsetWidth/2, 3))
-	datelabel.style.top = Math.round(dateline.getBoundingClientRect().y + window.scrollY - datelabel.offsetHeight, 3)
+	datelabel.style.left = Math.max(timeseries.getBoundingClientRect().x + window.scrollX, Math.round(dateline.getBoundingClientRect().x + window.scrollX - datelabel.offsetWidth/2, 3))+'px'
+	datelabel.style.top = Math.round(dateline.getBoundingClientRect().y + window.scrollY - datelabel.offsetHeight, 3)+'px'
 
 	bidencircle.setAttributeNS(null, 'r', 6.5)
 	trumpcircle.setAttributeNS(null, 'r', 6.5)

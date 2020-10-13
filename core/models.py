@@ -93,6 +93,7 @@ class Prediction2(models.Model):
     
 class StatePoll(models.Model):
     state = models.ForeignKey(State,on_delete=models.CASCADE,related_name='polls')
+    cd2 = models.BooleanField(default=False)
     start_date = models.DateField(default=timezone.now)
     end_date = models.DateField(default=timezone.now)
     percent_trump = models.FloatField()
@@ -100,7 +101,6 @@ class StatePoll(models.Model):
     n = models.FloatField()
     pollType = models.CharField(max_length=2)
     pollster = models.CharField(max_length=200)
-    moe = models.FloatField()
     url = models.TextField()
 
 class PreviousElection(models.Model):
@@ -145,6 +145,10 @@ class Demographic(models.Model):
     value = models.FloatField(default=-1)
     important = models.BooleanField(default=False)
 
+class CorrelationMatrix(models.Model):
+    # just store it as json
+    matrix = models.TextField()
+
 ##class District(models.Model):
 ##    name = models.CharField(max_length=500)
 ##    
@@ -183,13 +187,12 @@ class Demographic(models.Model):
 #Blogpost Tag (or for anything else)
 class Tag(models.Model):
     name = models.CharField(max_length=100)
-    state = models.ForeignKey(State, null=True,blank=True, on_delete=models.SET_NULL,related_name="states")
+    state = models.ForeignKey(State, null=True,blank=True, on_delete=models.SET_NULL)
     #If an article is tagged with a state, it should be visible in that state's
     #States and their tags should be created in bulk
     
 #Relatively simple if there are no authors
 class Blogpost(models.Model):
-    timestamp = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=500)
     description = models.TextField() #When it appears on the homepage/state profile
     content = MarkdownxField() #Actual markdown content

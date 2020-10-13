@@ -28,16 +28,17 @@
 			paths[i].style.strokeWidth = 0.02*document.getElementById(id).contentDocument.getElementsByTagName('svg')[0].viewBox.baseVal.height+'px'
 			paths[i].style.textAlign = 'right'
 			paths[i].style.cursor = 'pointer'
+			document.getElementById('label'+id).style.top = (paths[i].getBoundingClientRect().y+paths[i].getBoundingClientRect().height)+'px'
 		}
 	};
 	</script>
 	<h1>Tossup states</h1>
 	<div class="state-collection">
 		{% for state in tossups %}
-			<a href="/state/{{ state.initials }}/"><object id="{{ state.initials }}" type="image/svg+xml" data="{% static 'core/image/states/'|add:state.initials|add:'.svg' %}" onload="colorState('{{ state.initials }}', {{ state.biden }})"></object></a>
+			<a href="/state/{{ state.initials }}/"><object id="{{ state.initials }}" type="image/svg+xml" data="{% static 'core/image/states/'|add:state.initials|add:'.svg' %}" onload="colorState('{{ state.initials }}', {{ state.biden }})"></object><label id="label{{ state.initials }}">{{ state.name }}</label></a>
 		{% endfor %}
 		{% for state in cd2tossups %}
-			<a href="/state/{{ state.initials }}2/"><object id="{{ state.initials }}2" type="image/svg+xml" data="{% static 'core/image/states/'|add:state.initials|add:'.svg' %}" onload="colorState('{{ state.initials }}2', {{ state.biden2 }})"></object></a>
+			<a href="/state/{{ state.initials }}2/"><object id="{{ state.initials }}2" type="image/svg+xml" data="{% static 'core/image/states/'|add:state.initials|add:'.svg' %}" onload="colorState('{{ state.initials }}2', {{ state.biden2 }})"></object><label id="label{{ state.initials }}2">{{ state.name }}</label></a>
 		{% endfor %}
 	</div>
 	<div>

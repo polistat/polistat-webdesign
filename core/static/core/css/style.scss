@@ -207,15 +207,31 @@ div.state-picker {
 		justify-content: space-around;
 		flex-wrap: wrap;
 		a {
+			text-decoration: none;
 			display: flex;
-			transition: transform 0.1s;
+			position: relative;
+			flex-direction: column;
 			margin: 0 2em 2em 2em;
 
-			&:hover {
-				transform: scale(1.1) rotate(10deg);
+			&:hover object {
+				transform: scale(1.05) rotate(5deg);
+			}
+
+			label {
+				position: absolute;
+				display: block;
+				font-size: 1.5em;
+				pointer-events: none;
+				text-align: center;
+				text-decoration: none;
+				color: black;
+				width: 100%;
+				margin-top: 0.5em;
+				font-weight: 500;
 			}
 		}
 		object {
+			transition: transform 0.1s;
 			pointer-events: none;
 			width: 10em;
 			max-height: 10em;

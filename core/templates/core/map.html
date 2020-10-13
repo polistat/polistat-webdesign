@@ -263,7 +263,7 @@
         })
         .on("click", function (event) {
         });
-
+        toggleMapReverse()
     });
   }
 
@@ -303,9 +303,11 @@
   const eastCoastValues = ["DC", "MD", "DE", "NJ", "CT", "RI", "MA", "VT", "NH"];
 
   const toggleMap = function (event) {
-    let buttons = document.getElementsByClassName('map-toggle-shape')
-    for (let i = 0; i < buttons.length; i++) {
-      buttons[i] === event.target ? buttons[i].classList.add('active') : buttons[i].classList.remove('active')
+    if (event) {
+      let buttons = document.getElementsByClassName('map-toggle-shape')
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i] === event.target ? buttons[i].classList.add('active') : buttons[i].classList.remove('active')
+      }
     }
     mode = "bubbles"
     states.style("fill", "#e6e6e6");
@@ -315,9 +317,11 @@
     (swingOnly ? bubbleLabels.filter(d => !(state_ev.get(d.properties.name).winstate_inc > 0.75 || state_ev.get(d.properties.name).winstate_chal > 0.75)) : bubbleLabels.filter(d => (state_ev.get(d.properties.name).ev > 5))).style("display", "block")
   };
   const toggleMapReverse = function () {
-    let buttons = document.getElementsByClassName('map-toggle-shape')
-    for (let i = 0; i < buttons.length; i++) {
-      buttons[i] === event.target ? buttons[i].classList.add('active') : buttons[i].classList.remove('active')
+    if (event) {
+      let buttons = document.getElementsByClassName('map-toggle-shape')
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i] === event.target ? buttons[i].classList.add('active') : buttons[i].classList.remove('active')
+      }
     }
     mode = "states"
     states.style("fill", function (d) { return fillColor(state_ev.get(d.properties.name).winstate_chal); })

@@ -30,7 +30,7 @@ def state(request,initials):
 	result = 'trump' if trump >= 55 else ('biden' if biden >= 55 else 'tossup')
 
 	correlations = json.loads(CorrelationMatrix.objects.first().matrix)[obj.initials+("2" if cd2 else "")]
-	similarstates = list(map(lambda i: i[0], list(sorted(correlations.items(), key=lambda i: abs(i[1])))[1:5]))
+	similarstates = list(map(lambda i: i[0], list(sorted([i for i in correlations.items() if i[1] != 0], key=lambda i: abs(i[1] - 1)))[:4]))
 	similar = State.objects.filter(initials__in=similarstates)
 	cd2similar = State.objects.filter(initials__in=map(lambda i: i[:2], filter(lambda i: '2' in i, similarstates)))
 

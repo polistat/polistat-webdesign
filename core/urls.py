@@ -10,5 +10,5 @@ urlpatterns = [
     path('viz/trump/', views.vizualization2, name='vizualization2'),
     path('state/<str:initials>/', views.state, name="state"),
     path('blog/<int:bid>/', views.blog, name="blog"),
-    path('methods/', views.methods, name="methods")
+    path('methodology/', views.methods, name="methods")
 ]

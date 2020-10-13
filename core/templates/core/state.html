@@ -88,6 +88,12 @@ body-blue
 
 <hr>
 
+<h1>About {{ state.name }}</h1>
+
+<p>{{state.description}}</p>
+
+<hr>
+
 <h1>Chance of winning over time</h1>
 
 {% include 'core/timeseries.html' %}
@@ -125,12 +131,6 @@ body-blue
 		{% include 'core/stateselect.html' %}
 	</div>
 </div>
-
-<hr>
-
-<h1>About {{ state.name }}</h1>
-
-<p>{{state.description}}</p>
 
 <!--<hr>
 

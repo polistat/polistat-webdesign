@@ -1,35 +1,9 @@
-<div id="chart">
-	<div id="yAxis">
-		<p>0</p>
-		<p>10</p>
-		<p>20</p>
-		<p>30</p>
-		<p>40</p>
-		<p>50</p>
-		<p>60</p>
-		<p>70</p>
-		<p>80</p>
-		<p>90</p>
-		<p>100</p>
-	</div>
-	<svg id="timeseries">
-		<defs>
-			<linearGradient id="oracle_gradient" x1="-0.497355" y1="2.17398e-08" x2="-0.497573" y2="378" gradientUnits="userSpaceOnUse">
-				<stop stop-color="#1B6CE5"/>
-				<stop offset="1" stop-color="#FF2E2E"/>
-			</linearGradient>
-		</defs>
+<div id="hwrapper">
+	<svg id="histogram">
 	</svg>
-	<div id="xAxis"></div>
+	<div id="hxAxis"></div>
 </div>
-<p id="endlabel">Nov 3</p>
-<p id="datelabel">Oct 12</p>
 <script>
-function datestring(date) {
-	date = date.toLocaleDateString("en-US").split('/')
-	return (date[0] === '9' ? 'Sep' : date[0] === '10' ? 'Oct' : date[0] === '11' ? 'Nov' : 'Err') + ' ' + date[1]
-}
-
 function draw() {
 	let height = timeseries.getBoundingClientRect().height - 20
 	let width = timeseries.getBoundingClientRect().width

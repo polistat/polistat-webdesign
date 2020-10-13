@@ -4,23 +4,23 @@
 
 {% block content %}
 
-<h1 class="model-header"><span class="red">Trump</span> is favored to win in 60% of model simulations</h1>
+<h1 class="model-header"><span class="{% if prediction.dem_win > prediction.rep_win %}blue{% else %}red{% endif %}">{% if prediction.dem_win > prediction.rep_win %}Biden{% else %}Trump{% endif %}</span> wins in {% if prediction.dem_win > prediction.rep_win %}{{ prediction.dem_win|floatformat:"0" }}{% else %}{{ prediction.rep_win|floatformat:"0" }}{% endif %}% of model simulations</h1>
 
-<p class="model-updated">Updated 2 hours ago</p>
+<p class="model-updated">Updated {{ prediction.timestamp|date:"SHORT_DATE_FORMAT" }}</p>
 
 <div class="map">{% include "core/map.html" %}</div>
 
 <hr>
 
-<h1>Time Series</h1>
+<h1>Chance of winning over time</h1>
 
 {% include 'core/timeseries.html' %}
 
 <hr>
 
-<h1>Histogram</h1>
+<h1>Electoral vote distribution</h1>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pretium sit eget nam velit mauris vel nisl. Vitae nullam iaculis interdum aliquam. Netus mattis nunc nulla vestibulum mauris commodo. Interdum nisl sapien volutpat pulvinar est porttitor.</p>
+{% include 'core/histogram.html' %}
 
 <hr>
 
@@ -34,19 +34,5 @@
 	</select></div></form>
 	<hr>
 </div>
-
-<h1>Recent blog posts</h1>
-
-<h2>Fishing for answers?</h2>
-
-<p>An in-depth look at the role of Nebraska's salmon population on election night.</p>
-
-<h2>In it for the long haul</h2>
-
-<p>The important, but not surprising, correlation between a state's relative dimensions and its electoral potential.</p>
-
-<h2>Beginner's guide to water polo or: how I stole the election</h2>
-
-<p>An autobiographical summary of the inner workings of a democracy&mdash;if you can even call it that.</p>
 
 {% endblock %}

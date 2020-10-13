@@ -18,6 +18,10 @@
     stroke-width: 2.5;
   }
 
+  .bubbles, .abbrevs {
+    pointer-events: none;
+  }
+
   .state-name {
     font-weight: 700;
     padding-bottom: 3px;

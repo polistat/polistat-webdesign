@@ -10,12 +10,13 @@
   </div>
 </div>
 <div class="tooltip"></div>
-<script src="https://d3js.org/d3.v6.min.js"></script>
 <script src="https://d3js.org/topojson.v2.min.js"></script>
 <script>
+  let stateToAbbrev = {}
 
   function initialize_map(state_ev) {
     d3.json("/media/visualizations/states_albers_10m.json").then(function (us) {
+
 
       const eastCoast = new Map();
 
@@ -78,7 +79,7 @@
           states.filter(data => (d.id == data.id)).attr("stroke", null).attr("stroke-width", 1).lower()
           bubbles.filter(data => (d.id == data.id))
             .attr("stroke", function (d) { return "rgba(0, 0, 0, 0.3)"; })
-            //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85 ? 1 : 2); })
+            //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60 ? 1 : 2); })
             .attr("stroke-width", 1)
             .lower()
             .transition()
@@ -86,8 +87,8 @@
             .attr("r", (d) => Math.sqrt(state_ev.get(d.properties.name).ev) * 5 + 3);
           tooltip.style("display", "none");
         })
-        .on("click", function (event) {
-          // this is where we will make it redirect to the corresponding state page
+        .on("click", function (event, d) {
+          location.href = "/state/"+stateToAbbrev[d.properties.name]+"/"
         });
 
       bubbles = map.append("g")
@@ -99,7 +100,7 @@
         .attr("class", "bubbles")
         .attr("fill", function (d) { return fillColor(state_ev.get(d.properties.name).winstate_chal); })
         .attr("stroke", function (d) { return "rgba(0, 0, 0, 0.3)"; })
-        //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85 ? 1 : 2); })
+        //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60 ? 1 : 2); })
         .attr("stroke-width", 1)
         .attr("r", (d) => Math.sqrt(state_ev.get(d.properties.name).ev) * 5 + 3)
         .attr("cx", (d) => path.centroid(d)[0] + ((state_ev.get(d.properties.name).abbrev in bubbleLabelOffset) ? bubbleLabelOffset[state_ev.get(d.properties.name).abbrev][0] : 0))
@@ -127,7 +128,7 @@
         .on("mouseout", function (event, d, i) {
           bubbles.filter(data => (d.id == data.id))
             .attr("stroke", function (d) { return "rgba(0, 0, 0, 0.3)"; })
-            //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85 ? 1 : 2); })
+            //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60 ? 1 : 2); })
             .attr("stroke-width", 1)
             .lower()
             .transition()
@@ -175,7 +176,7 @@
           states.filter(data => (d.id == data.id)).attr("stroke", null).attr("stroke-width", 1).lower()
           bubbles.filter(data => (d.id == data.id))
             .attr("stroke", function (d) { return "rgba(0, 0, 0, 0.3)"; })
-            //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85 ? 1 : 2); })
+            //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60 ? 1 : 2); })
             .attr("stroke-width", 1)
             .lower()
             .transition()
@@ -220,7 +221,7 @@
         .on("mouseout", function (event, d, i) {
           bubbles.filter(data => (d.id == data.id))
             .attr("stroke", function (d) { return "rgba(0, 0, 0, 0.3)"; })
-            //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85 ? 1 : 2); })
+            //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60 ? 1 : 2); })
             .attr("stroke-width", 1)
             .lower()
             .transition()
@@ -269,10 +270,13 @@
     });
   }
 
+  let modelData = {{ model|safe }}
+
   d3.csv(  "/media/visualizations/state_data_2.csv",
   
     ({ state, ev, voteshare_inc, voteshare_chal, winstate_inc, winstate_chal, bins, abbrev }) => {
-      return [state, { ev: +ev, voteshare_inc: +voteshare_inc, voteshare_chal: +voteshare_chal, winstate_inc: +winstate_inc, winstate_chal: +winstate_chal, bins, abbrev }];
+      stateToAbbrev[state] = abbrev
+      return [state, { ev: +ev, voteshare_inc: modelData[abbrev]["voteshare_inc"]*100, voteshare_chal: modelData[abbrev]["voteshare_chal"]*100, winstate_inc: modelData[abbrev]["winstate_inc"]/100, winstate_chal: modelData[abbrev]["winstate_chal"]/100, bins, abbrev }];
     }
   ).then(data => {
     state_ev = Object.assign(
@@ -309,10 +313,10 @@
     }
     mode = "bubbles"
     states.style("fill", "#e6e6e6");
-    (swingOnly ? bubbles.filter(d => !(state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85)) : bubbles).style("display", "block")
+    (swingOnly ? bubbles.filter(d => !(state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60)) : bubbles).style("display", "block")
     stateLabels.style("display", "none")
     bubbleLabels.style("display", "none");
-    (swingOnly ? bubbleLabels.filter(d => !(state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85)) : bubbleLabels.filter(d => (state_ev.get(d.properties.name).ev > 5))).style("display", "block")
+    (swingOnly ? bubbleLabels.filter(d => !(state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60)) : bubbleLabels.filter(d => (state_ev.get(d.properties.name).ev > 5))).style("display", "block")
   };
   const toggleMapReverse = function () {
     let buttons = document.getElementsByClassName('map-toggle-shape')
@@ -321,9 +325,9 @@
     }
     mode = "states"
     states.style("fill", function (d) { return fillColor(state_ev.get(d.properties.name).winstate_chal); })
-    if (swingOnly) states.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85)).style("fill", "#e6e6e6");
+    if (swingOnly) states.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60)).style("fill", "#e6e6e6");
     bubbles.style("display", "none");
-    (swingOnly ? stateLabels.filter(d => !(state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85)) :stateLabels).filter(d => (eastCoastValues.includes(state_ev.get(d.properties.name).abbrev)) == false).style("display", "block")
+    (swingOnly ? stateLabels.filter(d => !(state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60)) :stateLabels).filter(d => (eastCoastValues.includes(state_ev.get(d.properties.name).abbrev)) == false).style("display", "block")
     bubbleLabels.style("display", "none")
   };
 
@@ -334,13 +338,13 @@
       buttons[i] === event.target ? buttons[i].classList.add('active') : buttons[i].classList.remove('active')
     }
     if (mode == "bubbles") {
-      bubbles.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85)).style("display", "none");
+      bubbles.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60)).style("display", "none");
       bubbleLabels.style("display", "block")
-      bubbleLabels.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85)).style("display", "none");
+      bubbleLabels.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60)).style("display", "none");
     }
     else {
-      states.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85)).style("fill", "#e6e6e6");
-      stateLabels.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.85 || state_ev.get(d.properties.name).winstate_chal > 0.85)).style("display", "none");
+      states.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60)).style("fill", "#e6e6e6");
+      stateLabels.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60)).style("display", "none");
     }
   };
   const toggleSwingStateReverse = function (d) {

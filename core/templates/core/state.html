@@ -3,9 +3,9 @@
 
 {% block title %}{{ state.name }}{% endblock %}
 
-{% block bodycolor %}{% if state.trump > state.biden %}
+{% block bodycolor %}{% if result == 'trump' %}
 body-red
-{%else%}
+{% elif result == 'biden' %}
 body-blue
 {% endif %}{% endblock %}
 
@@ -18,24 +18,28 @@ body-blue
 
 <div class="state-result">
 	<div>
-		<h2 class="topline"><span class="candidate blue">Biden</span> is favored to win</h2>
+		{% if result != 'tossup' %}<h2 class="topline"><span class="candidate {% if result == 'trump' %}red{% else %}blue{% endif %}">{% if result == 'trump' %}Trump{% else %}Biden{% endif %}</span> is favored to win</h2>
+		{% else %}<h2 class="topline">We've got a<span class="candidate tossup">tossup</span></h2>
+		{% endif %}
 		<script>
+			const fillColor = d3.scaleLinear().domain([0, 0.5, 1]).range(["#EF3D3D", "#e6e6e6", "#1B6CE5"])
 			function colorSVG() {
 				let paths = stateSVG.contentDocument.getElementsByTagName("path")
 				for (let i = 0; i < paths.length; i++) {
-					paths[i].style.fill = '#1B6CE5'
+					paths[i].style.fill = fillColor({{ biden }}/100)
 					paths[i].style.textAlign = 'right'
 				}
 			}
 		</script>
 		<div>
-				<object id="stateSVG" type="image/svg+xml" data="{% static 'core/image/states/'|add:state.initials|add:'.svg' %}" onload="colorSVG()"></object><div class="stats">
+			<object id="stateSVG" type="image/svg+xml" data="{% static 'core/image/states/'|add:state.initials|add:'.svg' %}" onload="colorSVG()"></object>
+			<div class="stats">
 				<div class="bpi">
-					123
+					{{ bpi }}
 				</div>
 				<label class="bpi">BPI</label>
 				<div class="avg">
-					+0.2
+					{{ pollavg }}
 				</div>
 				<label class="avg">Poll<br>Avg.</label>
 			</div>
@@ -49,22 +53,22 @@ body-blue
 		</tr>
 		<tr class="trump">
 			<td>Donald Trump</td>
-			<td>{{ state.trump }}</td>
-			<td>{{ state.trump }}</td>
+			<td>{{ trumpv|floatformat }}%</td>
+			<td>{{ trump|floatformat:"0" }}%</td>
 		</tr>
 		<tr class="biden">
 			<td>Joe Biden</td>
-			<td>{{ state.biden }}</td>
-			<td>{{ state.biden }}</td>
+			<td>{{ bidenv|floatformat }}%</td>
+			<td>{{ biden|floatformat:"0" }}%</td>
 		</tr>
 	</table>
 </div>
 
 <hr>
 
-<h1>Time Series</h1>
+<h1>Chance of winning over time</h1>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pretium sit eget nam velit mauris vel nisl. Vitae nullam iaculis interdum aliquam. Netus mattis nunc nulla vestibulum mauris commodo. Interdum nisl sapien volutpat pulvinar est porttitor.</p>
+{% include 'core/timeseries.html' %}
 
 <hr>
 

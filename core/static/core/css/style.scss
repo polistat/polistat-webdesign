@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
 
 @import 'vars.scss';
 @import 'map.scss';
@@ -435,12 +435,18 @@ main .content .state-result {
 				font-size: 2.5em;
 				display: block;
 				line-height: 0.9;
+				padding-right: 0.1em;
 			}
 			.blue {
 				color: $blue;
 			}
 			.red {
 				color: $red;
+			}
+			.tossup {
+				background: $gradient;
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
 			}
 		}
 
@@ -529,6 +535,7 @@ main .content .state-result {
 	grid-template-columns: auto 1fr;
 	grid-template-rows: auto auto;
 	margin-right: 2em;
+	padding-bottom: 2em;
 
 	#yAxis {
 		grid-row-start: 1;
@@ -653,7 +660,16 @@ main .content .state-result {
 	padding-bottom: 0.5em;
 	font-weight: 500;
 	font-size: 1.4rem;
-	background: linear-gradient(90deg, #1B6CE5 0%, #FF2E2E 100%);
+	background: $gradient;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
+}
+
+#histogram {
+	width: 100%;
+	height: 25em;
+}
+
+#hxAxis {
+	width: 100%;
 }

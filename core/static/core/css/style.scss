@@ -343,3 +343,317 @@ select {
 form {
 	margin: 0;
 }
+
+main .content .state-header {
+	h1 {
+		display: flex;
+		margin-top: 1rem;
+		margin-bottom: 2rem;
+		font-size: 2em;
+		font-weight: 300;
+		line-height: 1.1;
+		white-space: nowrap;
+		align-items: baseline;
+
+		span {
+			font-size: 1.5em;
+			font-weight: 500;
+			margin-right: auto;
+			padding-right: 2rem;
+			white-space: normal;
+		}
+
+		@media only screen and (max-width: 750px) {
+			font-size: 1.5em;
+			span {
+				font-size: 1.4em;
+			}
+		}
+	}
+
+	hr {
+		margin-top: 0;
+	}
+}
+
+main .content .state-result {
+	table {
+		width: 100%;
+
+		@media only screen and (max-width: 750px) {
+			display: none;
+		}
+
+		th {
+			padding-bottom: 0.2em;
+			color: #8a8a8a;
+			text-transform: uppercase;
+			font-weight: 400;
+			text-align: left;
+
+			&:last-child {
+				text-align: right;
+			}
+		}
+
+		td {
+			padding-top: 0.2em;
+			font-size: 2em;
+			font-weight: 400;
+
+			&:first-child {
+				font-weight: 500;
+			}
+
+			&:last-child {
+				font-weight: 500;
+				text-align: right;
+			}
+		}
+
+		tr.trump td:last-child {
+			color: $red;
+		}
+
+		tr.biden td:last-child {
+			color: $blue;
+		}
+	}
+
+	& > div {
+		display: flex;
+		position: relative;
+		margin-bottom: 2vw;
+		justify-content: space-between;
+		.topline {
+			margin: auto 0 auto 0;
+			font-size: 2.5vw;
+			text-transform: uppercase;
+			font-style: italic;
+			font-weight: 500;
+			.candidate {
+				font-size: 2.5em;
+				display: block;
+				line-height: 0.9;
+			}
+			.blue {
+				color: $blue;
+			}
+			.red {
+				color: $red;
+			}
+		}
+
+		& > div {
+			display: block;
+			text-align: right;
+			flex-grow: 1;
+			white-space: nowrap;
+		}
+
+		object {
+			display: inline-block;
+			height: 100%;
+			margin: 0 2rem;
+		}
+
+		.stats {
+			font-size: 2.5vw;
+			font-weight: 500;
+			color: #333333;
+			vertical-align: text-bottom;
+			height: 100%;
+
+			display: inline-grid;
+			grid-template-columns: 1fr min-content;
+			grid-template-rows: 1fr 1fr;
+
+			div {
+				margin-top: auto;
+				margin-bottom: auto;
+				text-align: right;
+			}
+
+			label {
+				color: #8b8b8b;
+				margin-left: 0.5em;
+				text-transform: uppercase;
+				margin-top: auto;
+				margin-bottom: auto;
+				font-size: 0.5em;
+				text-align: left;
+			}
+		}
+
+		@media only screen and (min-width: 1201px) and (max-width: 1500px) {
+			.stats, .topline {
+				font-size: 1.8vw;
+			}
+		}
+
+		@media only screen and (max-width: 1200px) {
+			.stats, .topline {
+				font-size: 3.5vw;
+			}
+		}
+
+		@media only screen and (max-width: 750px) {
+			display: block;
+
+			.topline {
+				font-size: 2em;
+			}
+
+			& > div {
+				margin-top: 1.5em;
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+			}
+
+			object {
+				display: block;
+				margin-right: 1em;
+				margin-left: auto;
+			}
+
+			.stats {
+				font-size: 2em;
+				margin-right: auto;
+			}
+		}
+	}
+}
+
+#chart {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: auto auto;
+	margin-right: 2em;
+
+	#yAxis {
+		grid-row-start: 1;
+		grid-row-end: 1;
+		grid-column-start: 1;
+		grid-column-end: 1;
+		margin-right: 1em;
+		margin-top: 2em;
+		text-align: right;
+		display: flex;
+		flex-direction: column-reverse;
+
+		justify-content: space-between;
+
+		p {
+			margin: 0;
+		}
+	}
+
+	#xAxis {
+		margin-top: 1em;
+		position: relative;
+		grid-row-start: 2;
+		grid-row-end: 2;
+		grid-column-start: 2;
+		grid-column-end: 2;
+		p {
+			margin: 0;
+			position: absolute;
+			white-space: nowrap;
+		}
+	}
+
+	#timeseries {
+		width: 100%;
+		height: 25em;
+		grid-row-start: 1;
+		grid-row-end: 1;
+		grid-column-start: 2;
+		grid-column-end: 2;
+		margin-right: 2em;
+		margin-top: 2em;
+
+		polyline, line {
+			fill: none;
+			stroke-width: 3;
+
+			&.bidenline {
+				stroke: $blue;
+			}
+
+			&.trumpline {
+				stroke: $red;
+			}
+
+			&.lightbidenline {
+				stroke: $blue;
+				stroke-opacity: 0.5;
+			}
+
+			&.lighttrumpline {
+				stroke: $red;
+				stroke-opacity: 0.5;
+			}
+
+			&.dashed {
+				stroke: black;
+				stroke-dasharray: 1 5;
+				stroke-width: 1px;
+				stroke-linecap: round;
+			}
+
+			&.endline {
+				stroke-width: 3px;
+				stroke-linecap: round;
+				stroke: rgba(51, 51, 51, 0.35);
+			}
+
+			&.dateline {
+				stroke-width: 3px;
+				stroke-linecap: round;
+				stroke: url(#oracle_gradient);
+				stroke-opacity: 0.5;
+			}
+		}
+
+		.bidencircle {
+			fill: $blue;
+		}
+
+		.trumpcircle {
+			fill: $red;
+		}
+
+		.bidenlabel, .trumplabel {
+			fill: $blue;
+			stroke: white;
+			stroke-width: 5px;
+			paint-order: stroke;
+			font-weight: 500;
+			font-size: 20px;
+		}
+
+		.trumplabel {
+			fill: $red;
+		}
+	}
+}
+
+#endlabel {
+	position: absolute;
+	margin: 0;
+	padding-bottom: 0.5em;
+	color: rgba(51, 51, 51, 0.35);
+	font-weight: 500;
+	font-size: 1.4rem;
+}
+
+#datelabel {
+	position: absolute;
+	margin: 0;
+	padding-bottom: 0.5em;
+	font-weight: 500;
+	font-size: 1.4rem;
+	background: linear-gradient(90deg, #1B6CE5 0%, #FF2E2E 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}

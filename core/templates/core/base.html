@@ -4,12 +4,21 @@
 <!doctype html>
 <html>
 	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-180551682-1"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-180551682-1');
+		</script>
 		<title>{% block title %}{% endblock %} | ORACLE of Blair</title>
 		<meta name="description" content="The ORACLE (Overall Results of an Analytical Consideration of the Looming Elections) of Blair is a senior class project at Montgomery Blair High School with the goal of modeling the 2020 presedential election."/>
 		<meta property="og:title" content="ORACLE of Blair"/>
 		<meta property="og:type" content="website"/>
-		<meta property="og:url" content="https://beta.polistat.mbhs.edu/"/>
-		<meta property="og:image" content="https://beta.polistat.mbhs.edu/static/core/image/school.png"/>
+		<meta property="og:url" content="https://polistat.mbhs.edu/"/>
+		<meta property="og:image" content="https://polistat.mbhs.edu/static/core/image/school.png"/>
 		<meta property="og:description" content="The ORACLE (Overall Results of an Analytical Consideration of the Looming Elections) of Blair is a senior class project at Montgomery Blair High School with the goal of modeling the 2020 presedential election."/>
 		<link rel="icon" type="image/png" href="{% static 'favicon.png' %}"/>
 		<link rel="stylesheet" href="{% sass_src 'core/css/style.scss' %}"/>

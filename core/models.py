@@ -193,6 +193,7 @@ class Tag(models.Model):
     
 #Relatively simple if there are no authors
 class Blogpost(models.Model):
+    timestamp = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=500)
     description = models.TextField() #When it appears on the homepage/state profile
     content = MarkdownxField() #Actual markdown content

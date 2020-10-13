@@ -20,6 +20,7 @@ class State(models.Model):
     variance2 = models.FloatField(default=0,blank=True)
     
     bpi = models.FloatField(default=0)
+    bpi2 = models.FloatField(default=0,blank=True,null=True)
     biden = models.FloatField(default=0)
     trump = models.FloatField(default=0)
 

@@ -90,6 +90,7 @@ class Command(BaseCommand):
                      p.save()
                      s.biden2 = biden
                      s.trump2 = trump
+                     s.mean2 = mean
                      s.save()
                  else:
                      s = get_object_or_404(State,name=state)
@@ -103,4 +104,5 @@ class Command(BaseCommand):
                      p.save()
                      s.biden = biden
                      s.trump = trump
+                     s.mean = mean
                      s.save()

@@ -124,6 +124,7 @@ body-blue
 	<script>
 	function colorState(id, biden) {
 		let paths = document.getElementById(id).contentDocument.getElementsByTagName("path")
+		document.getElementById(id).contentDocument.getElementsByTagName('svg')[0].setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid meet')
 		document.getElementById(id).contentDocument.getElementsByTagName('svg')[0].viewBox.baseVal.x -= document.getElementById(id).contentDocument.getElementsByTagName('svg')[0].viewBox.baseVal.width * 0.02
 		document.getElementById(id).contentDocument.getElementsByTagName('svg')[0].viewBox.baseVal.width *= 1.04
 		document.getElementById(id).contentDocument.getElementsByTagName('svg')[0].viewBox.baseVal.y -= document.getElementById(id).contentDocument.getElementsByTagName('svg')[0].viewBox.baseVal.height * 0.02

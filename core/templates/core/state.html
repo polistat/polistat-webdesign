@@ -12,7 +12,7 @@ body-blue
 {% block content %}
 
 <div class="state-header">
-	<h1><span>{{ state.name }}</span> {{ state.electoral_votes }} votes</h1>
+	<h1><span>{{ state.name }}{% if state.initials == 'NE' %}{% if CD2 %} CD2{% endif %}{% elif state.initials == 'ME' %}{% if CD2 %} CD2{% endif %}{% endif %}</span> {% if state.initials == 'NE' %}{% if CD2 %}1 vote{% else %}4 votes{% endif %}{% elif state.initials == 'ME' %}{% if CD2 %}1 vote{% else %}3 votes{% endif %}{% else %}{{ state.electoral_votes }} votes{% endif %}</h1>
 	<hr>
 </div>
 

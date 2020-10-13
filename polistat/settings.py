@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get("POLISTAT_SECRETKEY", "asdf")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [os.environ.get("POLISTAT_ALLOWED_HOST", "127.0.0.1")]
+ALLOWED_HOSTS = [os.environ.get("POLISTAT_ALLOWED_HOST", "127.0.0.1"), "a2d52a5ad9f8.ngrok.io"]
 
 
 # Application definition

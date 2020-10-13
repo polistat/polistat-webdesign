@@ -5,7 +5,10 @@
 	<option value="../">National</option>
 	{% for s in states %}
 	{% if s.initials == 'NE' %}
-	<option {% if state and state.initials == s.initials and not CD2 %}selected {% endif %}value="{{ s.initials }}">{{ s.name }} CD1, CD3</option>
+	<option {% if state and state.initials == s.initials and not CD2 %}selected {% endif %}value="{{ s.initials }}">{{ s.name }}</option>
+	<option {% if state and state.initials == s.initials and CD2 %}selected {% endif %}value="{{ s.initials }}2">{{ s.name }} CD2</option>
+	{% elif s.initials == 'ME' %}
+	<option {% if state and state.initials == s.initials and not CD2 %}selected {% endif %}value="{{ s.initials }}">{{ s.name }}</option>
 	<option {% if state and state.initials == s.initials and CD2 %}selected {% endif %}value="{{ s.initials }}2">{{ s.name }} CD2</option>
 	{% else %}
 	<option {% if state and state.initials == s.initials %}selected {% endif %}value="{{ s.initials }}">{{ s.name }}</option>

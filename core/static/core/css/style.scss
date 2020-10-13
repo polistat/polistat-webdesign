@@ -8,6 +8,22 @@
 	font-weight: inherit;
 }
 
+.katex * {
+	font-family: KaTeX_Main,Times New Roman,serif;
+}
+
+blockquote {
+	border-left: 1px solid black;
+	margin-left: 1em;
+	padding: 0.2em 0 0.2em 1em;
+	color: #404040;
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+strong {
+	font-weight: 500;
+}
+
 html, body {
 	padding: 0;
 	margin: 0;
@@ -273,6 +289,10 @@ main {
 
 		h1 {
 			font-weight: 500;
+		}
+
+		& > h1:first-child {
+			font-size: 2.5em;
 		}
 
 		@media only screen and (max-width: 1200px) {

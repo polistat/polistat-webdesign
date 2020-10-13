@@ -7,29 +7,41 @@
 <script>
 let frequencies = {{ frequencies }}
 let lastH = 0
-let perLabel = 22
-while (perLabel/539 * hbars.getBoundingClientRect().width < 60) {
-	perLabel *= 2
-}
+let perLabel = 10
 for (let i = 0; i < 539; i++) {
 	if (lastH === 0 && frequencies[i] === 0 && frequencies[i+1] === 0) document.getElementById('h'+i).remove()
 	else {
 		if (frequencies[i] !== 0) lastH = i
-		if (i % perLabel === 0) document.getElementById('h'+i).setAttribute('data-label', i < 270 ? 538 - i : i)
 		document.getElementById('h'+i).style.height = frequencies[i]/Math.max(...frequencies)*100+'%'
 	}
 }
 for (let i = lastH+1; i < 539; i++) {
 	document.getElementById('h'+i).remove()
 }
-window.addEventListener('resize', function () {
-	let perLabel = 22
-	while (perLabel/539 * hbars.getBoundingClientRect().width < 60) {
+console.log(hbars.getBoundingClientRect().width)
+window.addEventListener('load', function () {
+	while (perLabel/hbars.childElementCount * hbars.getBoundingClientRect().width < 90) {
 		perLabel *= 2
 	}
-	for (let i = 0; i < 539; i++) {
-		if (i % perLabel === 0 && document.getElementById('h'+i)) document.getElementById('h'+i).setAttribute('data-label', i < 270 ? 538 - i : i)
-		else if (document.getElementById('h'+i)) document.getElementById('h'+i).removeAttribute('data-label')
+	for (let i = 0; i < 270; i++) {
+		if (i % perLabel === 0 && document.getElementById('h'+(270+i))) document.getElementById('h'+(270+i)).setAttribute('data-label', '+'+i)
+		if (i % perLabel === 0 && document.getElementById('h'+(270-i))) document.getElementById('h'+(270-i)).setAttribute('data-label', '+'+i)
+	}
+})
+window.addEventListener('resize', function () {
+	perLabel = 20
+	console.log('asdf', hbars.getBoundingClientRect().width)
+	while (perLabel/hbars.childElementCount * hbars.getBoundingClientRect().width < 90) {
+		perLabel *= 2
+	}
+	for (let i = 0; i < 270; i++) {
+		if (i % perLabel === 0) {
+			if (document.getElementById('h'+(270+i))) document.getElementById('h'+(270+i)).setAttribute('data-label', '+'+i)
+			if (document.getElementById('h'+(270-i))) document.getElementById('h'+(270-i)).setAttribute('data-label', '+'+i)
+		} else {
+			if (document.getElementById('h'+(270+i))) document.getElementById('h'+(270+i)).removeAttribute('data-label')
+			if (document.getElementById('h'+(270-i))) document.getElementById('h'+(270-i)).removeAttribute('data-label')
+		}
 	}
 });
 </script>

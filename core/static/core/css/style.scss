@@ -950,6 +950,19 @@ main .content .mobile-votes {
 		}
 	}
 
+	#h270 {
+		&:before {
+			content: "+0";
+			position: absolute;
+			bottom: -1.7em;
+			font-weight: 500;
+			color: rgba(51, 51, 51, 0.35);
+			font-size: 1.5em;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+	}
+
 	.hbar {
 		margin-top: auto;
 		flex-grow: 1;

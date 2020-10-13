@@ -161,6 +161,15 @@ nav ul.desktop {
 		}
 	}
 
+	div.select {
+		margin: 0 1em;
+		margin-top: 1em;
+	}
+
+	select {
+		width: 100%;
+	}
+
 	img {
 		position: absolute;
 		bottom: 0;
@@ -190,6 +199,17 @@ div.mobile-state-picker {
 	display: none;
 	@media only screen and (max-width: 1200px) {
 		display: block;
+		& > h1, & > form {
+			display: inline-block;
+			vertical-align: middle;
+		}
+		& > h1 {
+			margin: 0;
+			margin-right: 0.3em;
+		}
+		& > form {
+			font-size: 1.2em;
+		}
 	}
 }
 
@@ -318,7 +338,7 @@ main {
 	}
 }
 
-h1.model-header {
+main .content h1.model-header {
 	text-transform: uppercase;
 	font-weight: 500;
 	font-style: italic;
@@ -497,6 +517,8 @@ main .content .state-result {
 			display: inline-block;
 			width: auto;
 			margin: 0 2rem;
+			visibility: hidden;
+			position: absolute;
 		}
 
 		.stats {

@@ -12,7 +12,7 @@ body-blue
 {% block content %}
 
 <div class="state-header">
-	<h1><span>{{ state.name }}{% if state.initials == 'NE' %}{% if CD2 %} CD2{% endif %}{% elif state.initials == 'ME' %}{% if CD2 %} CD2{% endif %}{% endif %}</span> {% if state.initials == 'NE' %}{% if CD2 %}1 vote{% else %}4 votes{% endif %}{% elif state.initials == 'ME' %}{% if CD2 %}1 vote{% else %}3 votes{% endif %}{% else %}{{ state.electoral_votes }} votes{% endif %}</h1>
+	<h1><span>{{ state.name }}{% if state.initials == 'NE' %}{% if CD2 %} CD-2{% endif %}{% elif state.initials == 'ME' %}{% if CD2 %} CD-2{% endif %}{% endif %}</span> {% if state.initials == 'NE' %}{% if CD2 %}1 vote{% else %}4 votes{% endif %}{% elif state.initials == 'ME' %}{% if CD2 %}1 vote{% else %}3 votes{% endif %}{% else %}{{ state.electoral_votes }} votes{% endif %}</h1>
 	<hr>
 </div>
 
@@ -45,16 +45,20 @@ body-blue
 			</div>
 		</div>
 		<script>
-		let aspectRatio;
-		stateSVG.addEventListener('load', function () {
+		let aspectRatio
+		let statesvgload = function () {
 			aspectRatio = stateSVG.offsetWidth/stateSVG.offsetHeight
 			stateSVG.style.height = document.getElementsByClassName('topline')[0].offsetHeight+'px'
 			stateSVG.style.width = document.getElementsByClassName('topline')[0].offsetHeight*aspectRatio+'px'
+			stateSVG.style.position = 'static'
+			stateSVG.style.visibility = 'visible'
 			window.addEventListener('resize', function () {
 				stateSVG.style.height = document.getElementsByClassName('topline')[0].offsetHeight+'px'
 				stateSVG.style.width = document.getElementsByClassName('topline')[0].offsetHeight*aspectRatio+'px'
 			})
-		})
+		}
+		stateSVG.addEventListener('load', statesvgload)
+		stateSVG.addEventListener('SVGLoad', statesvgload)
 		</script>
 	</div>
 	<table>
@@ -87,6 +91,12 @@ body-blue
 <h1>About {{ state.name }}</h1>
 
 <p>{{state.description}}</p>
+
+<div class="mobile-state-picker">
+	<hr>
+	<h1>Take me to a state:</h1>
+	{% include 'core/stateselect.html' %}
+</div>
 
 <!--<hr>
 

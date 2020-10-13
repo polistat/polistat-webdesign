@@ -86,7 +86,7 @@ function draw() {
 
 	bidenlabel.textContent = 'Biden ' + Math.round(biden[day]) + '%'
 	trumplabel.textContent = 'Trump ' + Math.round(trump[day]) + '%'
-	if (biden[day] > trump[day]) {
+	if (biden[day] > trump[day] && biden[day] < 90 || trump[day] > 90) {
 		bidenlabel.setAttributeNS(null, 'x', Math.max(3, day*(width / days) - bidenlabel.getBoundingClientRect().width - 10))
 		bidenlabel.setAttributeNS(null, 'y', Math.max(bidenlabel.getBoundingClientRect().height + 3, ((1-biden[day]/100) * height + 10) - 15))
 		trumplabel.setAttributeNS(null, 'x', Math.max(3, day*(width / days) - trumplabel.getBoundingClientRect().width - 10))

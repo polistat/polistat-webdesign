@@ -79,7 +79,7 @@
           states.filter(data => (d.id == data.id)).attr("stroke", null).attr("stroke-width", 1).lower()
           bubbles.filter(data => (d.id == data.id))
             .attr("stroke", function (d) { return "rgba(0, 0, 0, 0.3)"; })
-            //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60 ? 1 : 2); })
+            //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.75 || state_ev.get(d.properties.name).winstate_chal > 0.75 ? 1 : 2); })
             .attr("stroke-width", 1)
             .lower()
             .transition()
@@ -88,7 +88,7 @@
           tooltip.style("display", "none");
         })
         .on("click", function (event, d) {
-          location.href = "/state/"+stateToAbbrev[d.properties.name]+"/"
+          if (window.innerWidth > 750) location.href = "/state/"+stateToAbbrev[d.properties.name]+"/"
         });
 
       bubbles = map.append("g")
@@ -100,7 +100,7 @@
         .attr("class", "bubbles")
         .attr("fill", function (d) { return fillColor(state_ev.get(d.properties.name).winstate_chal); })
         .attr("stroke", function (d) { return "rgba(0, 0, 0, 0.3)"; })
-        //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60 ? 1 : 2); })
+        //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.75 || state_ev.get(d.properties.name).winstate_chal > 0.75 ? 1 : 2); })
         .attr("stroke-width", 1)
         .attr("r", (d) => Math.sqrt(state_ev.get(d.properties.name).ev) * 5 + 3)
         .attr("cx", (d) => path.centroid(d)[0] + ((state_ev.get(d.properties.name).abbrev in bubbleLabelOffset) ? bubbleLabelOffset[state_ev.get(d.properties.name).abbrev][0] : 0))
@@ -128,7 +128,7 @@
         .on("mouseout", function (event, d, i) {
           bubbles.filter(data => (d.id == data.id))
             .attr("stroke", function (d) { return "rgba(0, 0, 0, 0.3)"; })
-            //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60 ? 1 : 2); })
+            //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.75 || state_ev.get(d.properties.name).winstate_chal > 0.75 ? 1 : 2); })
             .attr("stroke-width", 1)
             .lower()
             .transition()
@@ -176,7 +176,7 @@
           states.filter(data => (d.id == data.id)).attr("stroke", null).attr("stroke-width", 1).lower()
           bubbles.filter(data => (d.id == data.id))
             .attr("stroke", function (d) { return "rgba(0, 0, 0, 0.3)"; })
-            //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60 ? 1 : 2); })
+            //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.75 || state_ev.get(d.properties.name).winstate_chal > 0.75 ? 1 : 2); })
             .attr("stroke-width", 1)
             .lower()
             .transition()
@@ -221,7 +221,7 @@
         .on("mouseout", function (event, d, i) {
           bubbles.filter(data => (d.id == data.id))
             .attr("stroke", function (d) { return "rgba(0, 0, 0, 0.3)"; })
-            //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60 ? 1 : 2); })
+            //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.75 || state_ev.get(d.properties.name).winstate_chal > 0.75 ? 1 : 2); })
             .attr("stroke-width", 1)
             .lower()
             .transition()
@@ -313,10 +313,10 @@
     }
     mode = "bubbles"
     states.style("fill", "#e6e6e6");
-    (swingOnly ? bubbles.filter(d => !(state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60)) : bubbles).style("display", "block")
+    (swingOnly ? bubbles.filter(d => !(state_ev.get(d.properties.name).winstate_inc > 0.75 || state_ev.get(d.properties.name).winstate_chal > 0.75)) : bubbles).style("display", "block")
     stateLabels.style("display", "none")
     bubbleLabels.style("display", "none");
-    (swingOnly ? bubbleLabels.filter(d => !(state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60)) : bubbleLabels.filter(d => (state_ev.get(d.properties.name).ev > 5))).style("display", "block")
+    (swingOnly ? bubbleLabels.filter(d => !(state_ev.get(d.properties.name).winstate_inc > 0.75 || state_ev.get(d.properties.name).winstate_chal > 0.75)) : bubbleLabels.filter(d => (state_ev.get(d.properties.name).ev > 5))).style("display", "block")
   };
   const toggleMapReverse = function () {
     let buttons = document.getElementsByClassName('map-toggle-shape')
@@ -325,9 +325,9 @@
     }
     mode = "states"
     states.style("fill", function (d) { return fillColor(state_ev.get(d.properties.name).winstate_chal); })
-    if (swingOnly) states.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60)).style("fill", "#e6e6e6");
+    if (swingOnly) states.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.75 || state_ev.get(d.properties.name).winstate_chal > 0.75)).style("fill", "#f0f0f0");
     bubbles.style("display", "none");
-    (swingOnly ? stateLabels.filter(d => !(state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60)) :stateLabels).filter(d => (eastCoastValues.includes(state_ev.get(d.properties.name).abbrev)) == false).style("display", "block")
+    (swingOnly ? stateLabels.filter(d => !(state_ev.get(d.properties.name).winstate_inc > 0.75 || state_ev.get(d.properties.name).winstate_chal > 0.75)) :stateLabels).filter(d => (eastCoastValues.includes(state_ev.get(d.properties.name).abbrev)) == false).style("display", "block")
     bubbleLabels.style("display", "none")
   };
 
@@ -338,13 +338,13 @@
       buttons[i] === event.target ? buttons[i].classList.add('active') : buttons[i].classList.remove('active')
     }
     if (mode == "bubbles") {
-      bubbles.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60)).style("display", "none");
+      bubbles.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.75 || state_ev.get(d.properties.name).winstate_chal > 0.75)).style("display", "none");
       bubbleLabels.style("display", "block")
-      bubbleLabels.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60)).style("display", "none");
+      bubbleLabels.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.75 || state_ev.get(d.properties.name).winstate_chal > 0.75)).style("display", "none");
     }
     else {
-      states.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60)).style("fill", "#e6e6e6");
-      stateLabels.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.60 || state_ev.get(d.properties.name).winstate_chal > 0.60)).style("display", "none");
+      states.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.75 || state_ev.get(d.properties.name).winstate_chal > 0.75)).style("fill", "#f0f0f0");
+      stateLabels.filter(d => (state_ev.get(d.properties.name).winstate_inc > 0.75 || state_ev.get(d.properties.name).winstate_chal > 0.75)).style("display", "none");
     }
   };
   const toggleSwingStateReverse = function (d) {

@@ -44,6 +44,8 @@ class StateAdmin(admin.ModelAdmin):
 ##    }
 
 admin.site.register(State,StateAdmin)
+
+admin.site.register(StatePoll)
 admin.site.register(NationalPrediction)
 
 admin.site.register(Prediction)

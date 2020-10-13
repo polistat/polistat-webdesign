@@ -46,6 +46,10 @@ body {
 nav a {
 	text-decoration: none;
 	color: inherit;
+
+	&:hover {
+		color: #707070;
+	}
 }
 
 nav ul.desktop {
@@ -871,7 +875,8 @@ main .content .mobile-votes {
 .poll {
 	font-size: 1.5em;
 	.poll-info {
-		a { color: black; }
+		a { color: black; text-decoration: none; }
+		a:hover { text-decoration: underline; }
 		display: flex;
 		justify-content: space-between;
 		font-weight: 500;
@@ -894,6 +899,7 @@ main .content .mobile-votes {
 
 		& > span {
 			white-space: nowrap;
+			font-weight: 300;
 		}
 
 		span.blue {

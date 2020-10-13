@@ -160,7 +160,7 @@ State C:
 The net effect of these states on each other would be:
 ​
 
-> For State A: (-0.03 &times; 0.8 - 0.04 &times; 0.1)/(0.8 + 0.1)
+> For State A: (-0.03 &times; 0.8 + 0.04 &times; 0.1)/(0.8 + 0.1)
 
 > For State B: (0.02 &times; 0.8 + 0.04 &times; 0.5)/(0.8 + 0.5)
 

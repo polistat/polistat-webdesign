@@ -147,11 +147,13 @@ trumplabel.classList.add('trumplabel')
 timeseries.appendChild(bidenlabel)
 timeseries.appendChild(trumplabel)
 
+let prevOffsetX = 500
 timeseries.addEventListener('mousemove', function (e) {
-	day = Math.min(biden.length-1, Math.round(e.offsetX*days/timeseries.getBoundingClientRect().width))
+	day = Math.min(biden.length-1, Math.round((e.clientX - timeseries.getBoundingClientRect().x)*days/timeseries.getBoundingClientRect().width))
 	draw()
 })
 
 timeseries.addEventListener('load', draw)
-window.addEventListener('resize', draw);
+timeseries.addEventListener('SVGLoad', draw)
+window.addEventListener('resize', draw)
 </script>

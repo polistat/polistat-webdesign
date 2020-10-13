@@ -67,7 +67,7 @@ Based on the number of polls in a block, we calculated the mean in three differe
 
 Rather than using the margin of error provided by the pollster, we calculated the variance for each poll by combining the sampling variation with the percentage of voters who indicated they weren’t affiliated with either candidate:
 ​
-$$varianceCombined = \sqrt{\frac{pq}{n}} + (\frac{1}{30} * (1 - (\%Trump + \%Biden)))^2$$
+$$varianceCombined = \frac{pq}{n} + (\frac{1}{30} * (1 - (\%Trump + \%Biden)))^2$$
 
 Using the mean and combined variance for each block, starting with the earliest block, we conducted z-tests between consecutive blocks, with a significance level of \\(\alpha = 0.05\\). A significant difference between two consecutive blocks indicates a significant shift in the voting intentions of the population, in which case polls from previous blocks would be discarded from the model. Otherwise, the two consecutive blocks would be combined. Therefore, the final block used for prediction would include all polls after the last significant population shift.
 ​

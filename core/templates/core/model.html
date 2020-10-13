@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<h1 class="model-header"><span class="{% if prediction.dem_win > prediction.rep_win %}blue{% else %}red{% endif %}">{% if prediction.dem_win > prediction.rep_win %}Biden{% else %}Trump{% endif %}</span> wins in {% if prediction.dem_win > prediction.rep_win %}{{ prediction.dem_win|floatformat:"0" }}{% else %}{{ prediction.rep_win|floatformat:"0" }}{% endif %}% of model simulations</h1>
+<h1 class="model-header"><span class="{% if prediction.dem_win > prediction.rep_win %}blue{% else %}red{% endif %}">{% if prediction.dem_win > prediction.rep_win %}Biden{% else %}Trump{% endif %}</span> wins in {% if prediction.dem_win > prediction.rep_win %}{% if prediction.dem_win|floatformat:"0" == "0" %}&lt;1%{% elif prediction.dem_win|floatformat:"0" == "100" %}&gt;99%{% else %}{{ prediction.dem_win|floatformat:"0" }}%{% endif %}{% else %}{% if prediction.rep_win|floatformat:"0" == "0" %}&lt;1%{% elif prediction.rep_win|floatformat:"0" == "100" %}&gt;99%{% else %}{{ prediction.rep_win|floatformat:"0" }}%{% endif %}{% endif %} of model simulations</h1>
 
 <p class="model-updated">Updated {{ prediction.timestamp|date:"SHORT_DATE_FORMAT" }}</p>
 

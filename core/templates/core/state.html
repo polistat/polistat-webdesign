@@ -23,11 +23,11 @@ body-blue
 		{% endif %}
 		<div class="mobile-wins">
 			<div class="trump">
-				{{ trump|floatformat:"0" }}%
+				{% if trump|floatformat:"0" == "0" %}&lt;1%{% elif trump|floatformat:"0" == "100" %}&gt;99%{% else %}{{ trump|floatformat:"0" }}%{% endif %}
 				<label>Trump wins</label>
 			</div>
 			<div class="biden">
-				{{ biden|floatformat:"0" }}%
+				{% if biden|floatformat:"0" == "0" %}&lt;1%{% elif biden|floatformat:"0" == "100" %}&gt;99%{% else %}{{ biden|floatformat:"0" }}%{% endif %}
 				<label>Biden wins</label>
 			</div>
 		</div>
@@ -96,12 +96,12 @@ body-blue
 		<tr class="trump">
 			<td>Donald Trump</td>
 			<td>{{ trumpv|floatformat }}%</td>
-			<td>{{ trump|floatformat:"0" }}%</td>
+			<td>{% if trump|floatformat:"0" == "0" %}&lt;1%{% elif trump|floatformat:"0" == "100" %}&gt;99%{% else %}{{ trump|floatformat:"0" }}%{% endif %}</td>
 		</tr>
 		<tr class="biden">
 			<td>Joe Biden</td>
 			<td>{{ bidenv|floatformat }}%</td>
-			<td>{{ biden|floatformat:"0" }}%</td>
+			<td>{% if biden|floatformat:"0" == "0" %}&lt;1%{% elif biden|floatformat:"0" == "100" %}&gt;99%{% else %}{{ biden|floatformat:"0" }}%{% endif %}</td>
 		</tr>
 	</table>
 </div>

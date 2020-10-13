@@ -51,7 +51,7 @@ class Command(BaseCommand):
              print(idate)
              if not inUse(y,m,d):
                  dates.append(date)
-         for date in dates:
+         for date in sorted(dates, lambda d: timezone.datetime(int(d[0]),int(d[1]),int(d[2]))):
              aps = []
              nws = []
              sos = []

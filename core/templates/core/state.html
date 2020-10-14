@@ -157,7 +157,7 @@ body-blue
 {% if state.polls.all %}
 	<hr>
 	<h1>Recent polls</h1>
-	{% for poll in state.polls.all %}
+	{% for poll in state.polls.all|dictsortreversed:"start_date" %}
 	{% if poll.cd2 == CD2 %}
 	<div class="poll">
 		<div class="poll-info"><a href="{{ poll.url }}">{{ poll.pollster }}</a><span><span class="poll-type">{{ poll.pollType|upper }}</span> <span class="poll-date">{{ poll.end_date|date:"n/j" }}</span></span></div>

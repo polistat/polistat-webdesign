@@ -41,7 +41,7 @@
 			<a href="/state/{{ state.initials }}/"><object id="{{ state.initials }}" type="image/svg+xml" data="{% static 'core/image/states/'|add:state.initials|add:'.svg' %}" onload="colorState('{{ state.initials }}', {{ state.biden }})"></object><label id="label{{ state.initials }}">{{ state.name }}</label></a>
 		{% endfor %}
 		{% for state in cd2tossups %}
-			<a href="/state/{{ state.initials }}2/"><object id="{{ state.initials }}2" type="image/svg+xml" data="{% static 'core/image/states/'|add:state.initials|add:'.svg' %}" onload="colorState('{{ state.initials }}2', {{ state.biden2 }})"></object><label id="label{{ state.initials }}2">{{ state.name }}</label></a>
+			<a href="/state/{{ state.initials }}2/"><object id="{{ state.initials }}2" type="image/svg+xml" data="{% static 'core/image/states/'|add:state.initials|add:'.svg' %}" onload="colorState('{{ state.initials }}2', {{ state.biden2 }})"></object><label id="label{{ state.initials }}2">{{ state.name }} CD-2</label></a>
 		{% endfor %}
 	</div>
 	<div>

@@ -13,6 +13,11 @@ class PreviousElectionInline(admin.StackedInline):
     model = PreviousElection
     extra=0
 
+class PreviousElectionInline2(admin.StackedInline):
+    model = PreviousElection2
+    extra=0
+
+
 class SenatorInline(admin.StackedInline):
     model = Senator
     extra=0
@@ -35,7 +40,7 @@ class DemographicInline(admin.StackedInline):
 
 class StateAdmin(admin.ModelAdmin):
     inlines = [
-        StatePollInline,PreviousElectionInline,SenatorInline,SenateElectionInline,RepresentativeInline,HouseElectionInline,DemographicInline
+        StatePollInline,PreviousElectionInline,PreviousElectionInline2,SenatorInline,SenateElectionInline,RepresentativeInline,HouseElectionInline,DemographicInline
     ]
 
 ##class BlogpostAdmin(admin.ModelAdmin):

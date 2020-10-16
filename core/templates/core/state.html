@@ -153,6 +153,29 @@ body-blue
 		{% include 'core/stateselect.html' %}
 	</div>
 </div>
+<hr>
+	<h1>Past Election History</h1>
+	{% if CD2 %}
+	{% for election in state.pastElections2.all %}
+	<div class="poll">
+		<div class="poll-info"><a href="{{ poll.url }}">{{ poll.pollster }}</a><span><span class="poll-type">{{ poll.pollType|upper }}</span> <span class="poll-date">{{ poll.end_date|date:"n/j" }}</span></span></div>
+		<div class="poll-results">
+			<span>{{election.dem_candiate}} <span class="blue">{{ election.percent_dems }}%</span></span>
+			<span>{{election.rep_candidate}} <span class="red">{{ election.percent_reps }}%</span></span>
+		</div>
+	</div>
+	{% endfor %}
+	{% else %}
+	{% for election in state.pastElections.all %}
+	<div class="poll">
+		<div class="poll-info"><a href="{{ poll.url }}">{{ poll.pollster }}</a><span><span class="poll-type">{{ poll.pollType|upper }}</span> <span class="poll-date">{{ poll.end_date|date:"n/j" }}</span></span></div>
+		<div class="poll-results">
+			<span>{{election.dem_candiate}} <span class="blue">{{ election.percent_dems }}%</span></span>
+			<span>{{election.rep_candidate}} <span class="red">{{ election.percent_reps }}%</span></span>
+		</div>
+	</div>
+	{% endfor %}
+	{% endif %}
 
 {% if state.polls.all %}
 	<hr>

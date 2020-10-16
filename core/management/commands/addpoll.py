@@ -43,9 +43,19 @@ class Command(BaseCommand):
 				try:
 					state = State.objects.filter(name=state_name.split(' CD-2')[0]).get()
 					try:
-						exist_poll = StatePoll.objects.filter(state=state, url=url, percent_biden=percent_biden, percent_trump=percent_trump).get()
+						poll = StatePoll.objects.filter(state=state, url=url, percent_biden=percent_biden, percent_trump=percent_trump).get()
 					except StatePoll.DoesNotExist:
-						state_poll = StatePoll(state=state, cd2=(' CD-2' in state_name), start_date=start_date, end_date=end_date, percent_trump=percent_trump, percent_biden=percent_biden, n=n, pollType=pollType, pollster=pollster, url=url)
-						state_poll.save()
+						poll = StatePoll()
+					poll.state = state
+					poll.cd2=(' CD-2' in state_name)
+					poll.start_date=start_date
+					poll.end_date = end_date
+					poll.percent_trump = percent_trump
+					poll.ercent_biden = percent_biden
+					poll.n=n
+					poll.pollType = pollType
+					poll.pollster = pollster
+					poll.url = url
+					poll.save()
 				except State.DoesNotExist:
 					print('failed to find state: ' + state_name)

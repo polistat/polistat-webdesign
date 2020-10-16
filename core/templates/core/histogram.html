@@ -8,8 +8,16 @@
 let frequencies = {{ frequencies }}
 let lastH = 0
 let perLabel = 10
+let firstN = 0
+let lastN = 538
+function maybeAdd(i, adj) {
+	if (i % perLabel === 0 && document.getElementById('h'+(adj)) && adj+10 < lastN && adj-10 > firstN) document.getElementById('h'+(adj)).setAttribute('data-label', '+'+i)
+}
 for (let i = 0; i < 539; i++) {
-	if (lastH === 0 && frequencies[i] === 0 && frequencies[i+1] === 0) document.getElementById('h'+i).remove()
+	if (lastH === 0 && frequencies[i] === 0 && frequencies[i+1] === 0) {
+		document.getElementById('h'+i).remove()
+		if (firstN < i) firstN = i
+	}
 	else {
 		if (frequencies[i] !== 0) lastH = i
 		document.getElementById('h'+i).style.height = frequencies[i]/Math.max(...frequencies)*100+'%'
@@ -17,14 +25,15 @@ for (let i = 0; i < 539; i++) {
 }
 for (let i = lastH+1; i < 539; i++) {
 	document.getElementById('h'+i).remove()
+	if (lastN > i) lastN = i
 }
 window.addEventListener('load', function () {
 	while (perLabel/hbars.childElementCount * hbars.getBoundingClientRect().width < 90) {
 		perLabel *= 2
 	}
 	for (let i = 0; i < 270; i++) {
-		if (i % perLabel === 0 && document.getElementById('h'+(270+i))) document.getElementById('h'+(270+i)).setAttribute('data-label', '+'+i)
-		if (i % perLabel === 0 && document.getElementById('h'+(270-i))) document.getElementById('h'+(270-i)).setAttribute('data-label', '+'+i)
+		maybeAdd(i, 270+i)
+		maybeAdd(i, 270-i)
 	}
 })
 window.addEventListener('resize', function () {
@@ -34,8 +43,8 @@ window.addEventListener('resize', function () {
 	}
 	for (let i = 0; i < 270; i++) {
 		if (i % perLabel === 0) {
-			if (document.getElementById('h'+(270+i))) document.getElementById('h'+(270+i)).setAttribute('data-label', '+'+i)
-			if (document.getElementById('h'+(270-i))) document.getElementById('h'+(270-i)).setAttribute('data-label', '+'+i)
+			maybeAdd(i, 270+i)
+			maybeAdd(i, 270-i)
 		} else {
 			if (document.getElementById('h'+(270+i))) document.getElementById('h'+(270+i)).removeAttribute('data-label')
 			if (document.getElementById('h'+(270-i))) document.getElementById('h'+(270-i)).removeAttribute('data-label')

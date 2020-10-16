@@ -162,8 +162,8 @@ body-blue
 	<div class="poll">
 		<div class="poll-info"><a href="{{ poll.url }}">{{ election.year }}</a><span><span class="poll-type">{{ poll.pollType|upper }}</span> <span class="poll-date">{{ poll.end_date|date:"n/j" }}</span></span></div>
 		<div class="poll-results">
-			<span>{{election.dem_candiate}} <span class="blue">{{ election.percent_dems }}%</span></span>
-			<span>{{election.rep_candidate}} <span class="red">{{ election.percent_reps }}%</span></span>
+			<span>{{election.dem_candiate}} <span class="blue">{{ election.percent_dems|floatformat }}%</span></span>
+			<span>{{election.rep_candidate}} <span class="red">{{ election.percent_reps|floatformat }}%</span></span>
 		</div>
 	</div>
 	{% endfor %}
@@ -172,8 +172,8 @@ body-blue
 	<div class="poll">
 		<div class="poll-info"><a href="{{ poll.url }}">{{ election.year }}</a><span><span class="poll-type">{{ poll.pollType|upper }}</span> <span class="poll-date">{{ poll.end_date|date:"n/j" }}</span></span></div>
 		<div class="poll-results">
-			<span>{{election.dem_candiate}} <span class="blue">{{ election.percent_dems }}%</span></span>
-			<span>{{election.rep_candidate}} <span class="red">{{ election.percent_reps }}%</span></span>
+			<span>{{election.dem_candiate}} <span class="blue">{{ election.percent_dems|floatformat }}%</span></span>
+			<span>{{election.rep_candidate}} <span class="red">{{ election.percent_reps|floatformat }}%</span></span>
 		</div>
 	</div>
 	{% endfor %}

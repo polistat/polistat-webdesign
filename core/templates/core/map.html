@@ -20,8 +20,8 @@
 
       const eastCoast = new Map();
 
-      const stateLabelOffset = { MI: [15, 30], FL: [15, 5], CA: [0, 25], HI: [19, 18], LA: [-10, 0], KY: [15, 0], TN: [-5, 5], VA: [5, 0], NC: [15, 5] }
-      const bubbleLabelOffset = { MI: [15, 30], FL: [15, 5], CA: [0, 25], HI: [19, 18], LA: [-10, 0], KY: [15, 0], TN: [-5, 5], VA: [5, 0], NC: [15, 5], VT: [-5, 0], NH: [5, -15], MA: [0, -10], RI: [5, 13], CT: [-10, 8], NJ: [-13, -2], PA: [-10, 0], MD: [0, 5], DE: [12, 5], DC: [20, 30]}
+      const stateLabelOffset = { MI: [15, 30], FL: [15, 5], CA: [0, 25], HI: [19, 18], LA: [-10, 0], KY: [15, 0], TN: [-5, 5], VA: [5, 0], NC: [15, 5], ME: [-2, 7] }
+      const bubbleLabelOffset = { MI: [15, 30], FL: [15, 5], CA: [0, 25], HI: [19, 18], LA: [-10, 0], KY: [15, 0], TN: [-5, 5], VA: [5, 0], NC: [15, 5], VT: [-5, 0], NH: [5, -15], MA: [0, -10], RI: [5, 13], CT: [-10, 8], NJ: [-13, -2], PA: [-10, 0], MD: [0, 5], DE: [12, 5], DC: [20, 30],  ME: [-2, 7]}
 
       // state_ev.forEach((value, key) => {
       //   if (eastCoastValues.indexOf(value.abbrev) !== -1) {
@@ -67,6 +67,7 @@
             }
           tooltip.style("display", "block");
           let node = tooltip.node();
+          console.log(d, state_ev)
           node.innerHTML = tooltipContent(d, state_ev);
         })
         .on("mousemove", function (event, d) {
@@ -138,6 +139,55 @@
         })
         .on("click", function (event) {
           // this is where we will make it redirect to the corresponding state page
+        });
+
+      cd2Bubbles = map.append("g")
+        .selectAll("circle")
+        .data(topojson.feature(us, us.objects.states).features)
+        .enter()
+        .append("circle")
+        .style("display", d => (["ME", "NE"].indexOf(state_ev.get(d.properties.name).abbrev) >= 0) ? "block" : "none")
+        .attr("class", "cd2bubbles")
+        .attr("fill", function (d) { return fillColor(state_ev.get(d.properties.name+" CD-2") ? state_ev.get(d.properties.name+" CD-2").winstate_chal : undefined); })
+        .attr("stroke", function (d) { return "rgba(0, 0, 0, 0.3)"; })
+        //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.75 || state_ev.get(d.properties.name).winstate_chal > 0.75 ? 1 : 2); })
+        .attr("stroke-width", 1)
+        .attr("r", 10)
+        .attr("cx", (d) => path.centroid(d)[0] + (d.properties.name === 'Maine' ? -1 : 45))
+        .attr("cy", (d) => path.centroid(d)[1] + (d.properties.name === 'Maine' ? -25 : 15))
+        .on("mouseover", function (event, d, i) {
+          cd2Bubbles.filter(data => (d.id == data.id))
+            .attr("stroke", "black")
+            .attr("stroke-width", 3)
+            .raise()
+            .transition()
+            .duration(200)
+            .attr("r", 12);
+          tooltip.style("display", "block");
+          let node = tooltip.node();
+          d = JSON.parse(JSON.stringify(d))
+          d.properties.name += ' CD-2'
+          node.innerHTML = tooltipContent(d, state_ev);
+        })
+        .on("mousemove", function (event, d) {
+          let measuredWidth = tooltip.node().getBoundingClientRect().width
+          tooltip
+            .style("top", (event.pageY + 30) + "px")
+            .style("left", (event.pageX - measuredWidth / 2) + "px");
+        })
+        .on("mouseout", function (event, d, i) {
+          cd2Bubbles.filter(data => (d.id == data.id))
+            .attr("stroke", function (d) { return "rgba(0, 0, 0, 0.3)"; })
+            //.attr("stroke-width", function (d) { return (state_ev.get(d.properties.name).winstate_inc > 0.75 || state_ev.get(d.properties.name).winstate_chal > 0.75 ? 1 : 2); })
+            .attr("stroke-width", 1)
+            .lower()
+            .transition()
+            .duration(200)
+            .attr("r", 10);
+          tooltip.style("display", "none");
+        })
+        .on("click", function (event, d) {
+          if (window.innerWidth > 750) location.href = "/state/"+stateToAbbrev[d.properties.name]+"2/"
         });
 
       stateLabels = map.append("g")

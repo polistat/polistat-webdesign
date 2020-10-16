@@ -112,6 +112,8 @@ body-blue
 
 <p>{{state.description}}</p>
 
+{% if state.initials == 'NE' or state.initials == 'ME' %}<p><em>Note: {{ state.name}} distributes some electoral votes according to the winner of each congressional district. Since the second congressional district votes less consistently with the state as a whole, it was simulated separately in our model. View {% if CD2 %}<a href="/state/{{ state.initials }}/">{{ state.name }}</a>{% else %}<a href="/state/{{ state.initials }}2/">{{ state.name }} CD-2</a>{% endif %}.</em></p>{% endif %}
+
 <hr>
 
 <h1>Chance of winning over time</h1>

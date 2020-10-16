@@ -18,6 +18,7 @@ def index(request):
 	model = {}
 	for state in State.objects.all():
 		model[state.initials] = {"voteshare_inc": state.mean, "voteshare_chal": 1 - state.mean, "winstate_inc": state.trump, "winstate_chal": state.biden}
+		if state.initials in ["ME", "NE"]: model[state.initials+"2"] = {"voteshare_inc": state.mean2, "voteshare_chal": 1 - state.mean2, "winstate_inc": state.trump2, "winstate_chal": state.biden2}
 	return render(request, "core/model.html", {"frequencies": EVFrequencies.objects.get().frequencies, "trumpev": trumpev, "bidenev": bidenev, "tossups": tossups, "cd2tossups": cd2tossups, "model": json.dumps(model), "prediction": prediction, "timeseries": {"biden": repr(list(map(lambda p: p.dem_win, predictions))), "trump": repr(list(map(lambda p: p.rep_win, predictions)))}})
 
 def state(request,initials):

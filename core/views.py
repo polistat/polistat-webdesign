@@ -38,6 +38,8 @@ def state(request,initials):
 	similar = State.objects.filter(initials__in=similarstates)
 	cd2similar = State.objects.filter(initials__in=map(lambda i: i[:2], filter(lambda i: '2' in i, similarstates)))
 
+	
+
 	return render(request, "core/state.html", {"similar": similar, "cd2similar": cd2similar, "trump": trump, "biden": biden, "bpi": bpi, "mean": mean, "CD2": cd2, "pollavg": ("+" if mean*100 >= 50 else "")+"{:.1f}".format(200*mean - 100), "state": obj, "result": result, "trumpv": mean*100, "bidenv": 100-mean*100, "timeseries": {"biden": repr(list(map(lambda p: p.percent_biden, predictions.order_by('timestamp').all()))), "trump": repr(list(map(lambda p: p.percent_trump, predictions.order_by('timestamp').all())))}})
 
 def blog(request,bid):

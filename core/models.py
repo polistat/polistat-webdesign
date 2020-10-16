@@ -111,6 +111,14 @@ class PreviousElection(models.Model):
     dem_candiate = models.CharField(max_length=100)
     rep_candidate = models.CharField(max_length=100)
 
+class PreviousElection2(models.Model):
+    state = models.ForeignKey(State,on_delete=models.CASCADE,related_name='pastElections2')
+    year = models.IntegerField()
+    percent_dems = models.FloatField()
+    percent_reps = models.FloatField()
+    dem_candiate = models.CharField(max_length=100)
+    rep_candidate = models.CharField(max_length=100)
+
 class Senator(models.Model):
     state = models.ForeignKey(State,on_delete=models.CASCADE,related_name='senators')
     name = models.CharField(blank=True,max_length=100)

@@ -51,7 +51,7 @@ class Command(BaseCommand):
 					poll.start_date=start_date
 					poll.end_date = end_date
 					poll.percent_trump = percent_trump
-					poll.ercent_biden = percent_biden
+					poll.percent_biden = percent_biden
 					poll.n=n
 					poll.pollType = pollType
 					poll.pollster = pollster

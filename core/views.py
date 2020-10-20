@@ -1,6 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, reverse
 from .models import *
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from markdown import markdown
 import json
 from django.db.models import Sum
@@ -52,7 +52,11 @@ def state(request,initials):
 	return render(request, "core/state.html", {"similar": similar, "cd2similar": cd2similar, "trump": trump, "biden": biden, "bpi": bpi, "mean": mean, "CD2": cd2, "pollavg": ("+" if mean*100 >= 50 else "")+"{:.1f}".format(200*mean - 100), "state": obj, "result": result, "trumpv": mean*100, "bidenv": 100-mean*100, "timeseries": {"biden": repr(list(map(lambda p: p.percent_biden, predictions.order_by('timestamp').all()))), "trump": repr(list(map(lambda p: p.percent_trump, predictions.order_by('timestamp').all())))}})
 
 def blog(request,bid):
-    return render(request,"core/blogpost.html",{"blogpost":get_object_or_404(Blogpost,pk=bid),"text":markdown(get_object_or_404(Blogpost,pk=bid).content)})
+    post = get_object_or_404(Blogpost,pk=bid)
+    if post.published or (request.user and len(request.user.groups.filter(name="Students"))>0):
+        return render(request,"core/blogpost.html",{"blogpost":post,"text":markdown(get_object_or_404(Blogpost,pk=bid).content)})
+    else:
+        return HttpResponseRedirect(reverse("core:index"))
 
 def methods(request):
     return render(request,"core/methods.html",{"methods":markdown(open("core/templates/core/methods.md",encoding="utf-8").read(),extensions=["footnotes"])})

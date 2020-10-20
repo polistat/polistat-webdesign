@@ -212,6 +212,7 @@ class Blogpost(models.Model):
     description = models.TextField() #When it appears on the homepage/state profile
     content = MDTextField() #Actual markdown content
     tags = models.ManyToManyField(Tag,blank=True)
+    published = models.BooleanField(default=False)
 
 #For things like the home page model update
 class Featured(models.Model):

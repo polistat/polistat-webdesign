@@ -213,6 +213,8 @@ class Blogpost(models.Model):
     content = MDTextField() #Actual markdown content
     tags = models.ManyToManyField(Tag,blank=True)
     published = models.BooleanField(default=False)
+    def __str__(self):
+        return self.title
 
 #For things like the home page model update
 class Featured(models.Model):

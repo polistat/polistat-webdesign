@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path(r'markdownx/', include('markdownx.urls')),
     path('admin/', admin.site.urls),
+    path('mdeditor/', include('mdeditor.urls')),
     path('', include("core.urls"))
 ]
 if settings.DEBUG:

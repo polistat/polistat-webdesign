@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from markdownx.models import MarkdownxField
+from mdeditor.fields import MDTextField
 
 
 PARTY_CHOICES = [("D","D"),("R","R"),("I","I")]
@@ -209,7 +210,7 @@ class Blogpost(models.Model):
     timestamp = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=500)
     description = models.TextField() #When it appears on the homepage/state profile
-    content = MarkdownxField() #Actual markdown content
+    content = MDTextField() #Actual markdown content
     tags = models.ManyToManyField(Tag,blank=True)
 
 #For things like the home page model update

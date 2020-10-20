@@ -211,3 +211,12 @@ class Blogpost(models.Model):
     description = models.TextField() #When it appears on the homepage/state profile
     content = MarkdownxField() #Actual markdown content
     tags = models.ManyToManyField(Tag,blank=True)
+
+#For things like the home page model update
+class Featured(models.Model):
+    name = models.CharField(max_length=500)
+    date = models.DateField(default=timezone.now)
+    content = models.TextField(blank=True)
+    hidden = models.BooleanField(default=False)
+    def __str__(self):
+        return self.name

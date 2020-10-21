@@ -209,6 +209,7 @@ class Tag(models.Model):
 class Blogpost(models.Model):
     timestamp = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=500)
+    slug = models.CharField(unique=True,max_length=500)
     description = models.TextField() #When it appears on the homepage/state profile
     content = MDTextField() #Actual markdown content
     tags = models.ManyToManyField(Tag,blank=True)

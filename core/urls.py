@@ -7,6 +7,6 @@ urlpatterns = [
     #Front Page
     path('', views.index, name='index'),
     path('state/<str:initials>/', views.state, name="state"),
-    path('blog/<int:bid>/', views.blog, name="blog"),
+    path('blog/<str:slug>/', views.blog, name="blog"),
     path('methodology/', views.methods, name="methods")
 ]

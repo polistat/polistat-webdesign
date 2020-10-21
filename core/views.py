@@ -54,7 +54,7 @@ def state(request,initials):
 def blog(request,slug):
     post = get_object_or_404(Blogpost,slug=slug)
     if post.published or (request.user and len(request.user.groups.filter(name="Students"))>0):
-        return render(request,"core/blogpost.html",{"blogpost":post,"text":markdown(get_object_or_404(Blogpost,slug=slug).content)})
+        return render(request,"core/blogpost.html",{"blogpost":post,"text":markdown(get_object_or_404(Blogpost,slug=slug).content,extensions=['tables','footnotes'])})
     else:
         return HttpResponseRedirect(reverse("core:index"))
 

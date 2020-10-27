@@ -14,6 +14,8 @@ class Command(BaseCommand):
 
 	def handle(self, *args, **options):
 		file_name = options['file_name']
+		polls = []
+		StatePoll.objects.all().delete()
 		with open(file_name, 'r') as file:
 			rows = csv.reader(file, delimiter=',')
 			next(rows)
@@ -42,10 +44,11 @@ class Command(BaseCommand):
 
 				try:
 					state = State.objects.filter(name=state_name.split(' CD-2')[0]).get()
-					try:
-						poll = StatePoll.objects.filter(state=state, url=url, percent_biden=percent_biden, percent_trump=percent_trump).get()
-					except StatePoll.DoesNotExist:
-						poll = StatePoll()
+					#try:
+					#	poll = StatePoll.objects.filter(state=state, start_date=start_date, pollster=pollster, percent_biden=percent_biden, percent_trump=percent_trump).get()
+					#except StatePoll.DoesNotExist:
+				#		poll = StatePoll()
+					poll = StatePoll()
 					poll.state = state
 					poll.cd2=(' CD-2' in state_name)
 					poll.start_date=start_date
@@ -57,5 +60,6 @@ class Command(BaseCommand):
 					poll.pollster = pollster
 					poll.url = url
 					poll.save()
+					print(poll)
 				except State.DoesNotExist:
 					print('failed to find state: ' + state_name)

@@ -1031,7 +1031,7 @@ main .content .mobile-votes {
 		&:before {
 			content: attr(data-prob);
 			position: absolute;
-			bottom: 5em;
+			bottom: 40%;
 			font-weight: 700;
 			color: black;
 			-webkit-text-stroke-width: 1px;

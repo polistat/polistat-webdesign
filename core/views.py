@@ -58,6 +58,8 @@ def blog(request,slug):
         return render(request,"core/blogpost.html",{"blogpost":post,"text":markdown(get_object_or_404(Blogpost,slug=slug).content,extensions=['tables','footnotes'])})
     else:
         return HttpResponseRedirect(reverse("core:index"))
+def blogindex(request):
+        return render(request,"core/blogindex.html",{"blogposts":Blogpost.objects.filter(published=True)})
 
 def methods(request):
     return render(request,"core/methods.html",{"methods":markdown(open("core/templates/core/methods.md",encoding="utf-8").read(),extensions=["footnotes"])})

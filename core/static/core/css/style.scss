@@ -999,6 +999,15 @@ main .content .mobile-votes {
 		flex-basis: 0;
 		background-color: rgba($blue, 0.5);
 		height: 50%;
+		pointer-events: none;
+
+		&.selected {
+			background-color: $blue;
+
+			&.trump {
+				background-color: $red;
+			}
+		}
 
 		&.trump {
 			background-color: rgba($red, 0.5);
@@ -1017,6 +1026,20 @@ main .content .mobile-votes {
 			font-size: 1.5em;
 			left: 50%;
 			transform: translateX(-50%);
+		}
+
+		&:before {
+			content: attr(data-prob);
+			position: absolute;
+			bottom: 5em;
+			font-weight: 700;
+			color: black;
+			-webkit-text-stroke-width: 1px;
+			-webkit-text-stroke-color: white;
+			font-size: 1.7em;
+			left: 50%;
+			transform: translateX(-50%);
+			z-index: 100;
 		}
 	}
 }

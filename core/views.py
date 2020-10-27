@@ -5,6 +5,7 @@ from markdown import markdown
 import json
 from django.db.models import Sum
 
+
 def index(request):
 	prediction = NationalPrediction.objects.latest('timestamp')
 	predictions = NationalPrediction.objects.order_by('timestamp').all()

@@ -89,24 +89,29 @@ document.getElementById('hbars').addEventListener('mousemove', function (e) {
 	if (oldEnd === -1) return
 	if (selectEnd > oldEnd) {
 		for (let i = oldEnd; i < selectEnd; i++) {
-			if(document.getElementById('h'+i)) document.getElementById('h'+i).classList.add('selected')
+			if (document.getElementById('h'+i)) document.getElementById('h'+i).classList.add('selected')
 		}
 	}
 	if (selectEnd < oldEnd) {
 		for (let i = selectEnd; i < oldEnd; i++) {
-			if(document.getElementById('h'+i)) document.getElementById('h'+i).classList.remove('selected')
+			if (document.getElementById('h'+i)) document.getElementById('h'+i).classList.remove('selected')
+		}
+	}
+	if (oldEnd < selectStart && selectEnd >= selectStart) {
+		for (let i = oldEnd; i < selectStart; i++) {
+			if (document.getElementById('h'+i)) document.getElementById('h'+i).classList.remove('selected')
 		}
 	}
 	if (selectEnd < selectStart) {
 		for (let i = oldEnd; i < selectEnd; i++) {
-			if(document.getElementById('h'+i)) document.getElementById('h'+i).classList.remove('selected')
+			if (document.getElementById('h'+i)) document.getElementById('h'+i).classList.remove('selected')
 		}
 		for (let i = selectEnd; i < selectStart; i++) {
-			if(document.getElementById('h'+i)) document.getElementById('h'+i).classList.add('selected')
+			if (document.getElementById('h'+i)) document.getElementById('h'+i).classList.add('selected')
 		}
 	}
 	for (let i = selectStart; i < selectEnd; i++) {
-		if(document.getElementById('h'+i)) document.getElementById('h'+i).classList.add('selected')
+		if (document.getElementById('h'+i)) document.getElementById('h'+i).classList.add('selected')
 	}
 })
 document.getElementById('hbars').addEventListener('dragstart', function (e) {

@@ -202,6 +202,8 @@ class EVFrequencies(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=100)
     state = models.ForeignKey(State, null=True,blank=True, on_delete=models.SET_NULL)
+    def __str__(self):
+        return self.name
     #If an article is tagged with a state, it should be visible in that state's
     #States and their tags should be created in bulk
     

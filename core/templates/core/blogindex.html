@@ -1,31 +1,27 @@
 {% extends 'core/base.html' %}
 
-{% block title %}{{blogpost.title}}{% endblock %}
+{% block title %}Blog{% endblock %}
 
 
 {% block content %}
-
-<style>
-img {width:100%;object-position: center;object-fit:contain;max-height:30em;}
-table {width:100%;align:center;text-align:center;border-collapse:collapse}
-td {border:1px solid gray;padding:10px}
-th {border:1px solid gray;padding:10px;background-color:#eeeeee}
-</style>
-
-
 <h1>ORACLE Blog</h1>
 <hr>
 {% if blogposts %}
 	{% for post in blogposts %}
 	<div class="poll">
-		<div class="poll-info"><a href="{% url 'core:blog' post.slug %}">{{ post.title }}</a><span><span class="poll-date" style="font-size:20px">{{ post.timestamp }}</span> </span></div>
-		<div class="poll-results">
-			<span style="white-space: normal">{{post.description}} </span>
+		<div class="poll-info blog-info"><a href="{% url 'core:blog' post.slug %}">{{ post.title }}</a><span><span class="poll-date blog-date" style="font-size:20px">{{ post.timestamp }}</span> </span></div>
+		<div class="poll-results blog-description">
+			<span style="white-space: normal">{{post.description}}</span>
 		</div>
 	</div>
 	{% endfor %}
 {% else %}
 <p>There are no blogposts at this time.</p>
 {% endif %}
-
+<style>
+img {width:100%;object-position: center;object-fit:contain;max-height:30em;}
+table {width:100%;align:center;text-align:center;border-collapse:collapse}
+td {border:1px solid gray;padding:10px}
+th {border:1px solid gray;padding:10px;background-color:#eeeeee}
+</style>
 {% endblock %}

@@ -29,6 +29,7 @@ html, body {
 	padding: 0;
 	margin: 0;
 	font-weight: 300;
+	min-height: 100%;
 }
 
 body {
@@ -405,7 +406,7 @@ main {
 		}
 
 		p {
-			line-height: 1.5;
+			line-height: 1.4;
 		}
 
 		@media only screen and (max-width: 1200px) {
@@ -914,9 +915,26 @@ main .content .mobile-votes {
 		.poll-date {
 			color: #8B8B8B;
 			margin-left: 0.5em;
+
+			&.blog-date {
+				white-space: nowrap;
+			}
 		}
 		& > span {
 			text-align: right;
+		}
+
+		&.blog-info {
+			@media only screen and (max-width: 1400px) {
+				display: block;
+
+				.poll-date.blog-date {
+					margin-left: 0;
+					display: block;
+					text-align: left;
+					padding-top: 0.2em;
+				}
+			}
 		}
 	}
 
@@ -939,6 +957,11 @@ main .content .mobile-votes {
 			color: $red;
 		}
 		font-weight: 700;
+
+		&.blog-description {
+			font-size: 1.3rem;
+			padding-bottom: 0.5em;
+		}
 	}
 
 	padding-bottom: 0.5em;
@@ -1042,4 +1065,8 @@ main .content .mobile-votes {
 			z-index: 100;
 		}
 	}
+}
+
+a {
+	word-break: break-word;
 }

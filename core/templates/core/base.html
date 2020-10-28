@@ -33,7 +33,7 @@
 			<ul class="desktop">
 				<li class="nav-logo"><a href="/"><img src="{% static 'core/image/nav.svg' %}"></a></li>
 				<li class="{% if request.path == '/' %}active{% endif %}"><a href="/">Home</a></li>
-				<li class="{% if request.path == '/blog/' %}active{% endif %}"><a href="/blog">Blog</a></li>
+				<li class="{% if request.path == '/blog/' or request.path|truncatechars:7 == '/blog/…' %}active{% endif %}"><a href="/blog">Blog</a></li>
 				<li class="{% if request.path == '/methodology/' %}active{% endif %}"><a href="/methodology">Methodology</a></li>
 				<!--<li class="{% if request.path == '/blog' %}active{% endif %}"><a href="/blog">Blog</a></li>-->
 				<li><a href="https://2018.polistat.mbhs.edu" target="_blank">2018 Model</a></li>

@@ -20,7 +20,7 @@ th {border:1px solid gray;padding:10px;background-color:#eeeeee}
 	<div class="poll">
 		<div class="poll-info"><a href="{% url 'core:blog' post.slug %}">{{ post.title }}</a><span><span class="poll-date" style="font-size:20px">{{ post.timestamp }}</span> </span></div>
 		<div class="poll-results">
-			<span>{{post.description}} </span>
+			<span style="white-space: normal">{{post.description}} </span>
 		</div>
 	</div>
 	{% endfor %}

@@ -7,7 +7,7 @@
 <h1>ORACLE Blog</h1>
 <hr>
 {% if blogposts %}
-	{% for post in blogposts %}
+	{% for post in blogposts|dictsortreversed:"timestamp" %}
 	<div class="poll">
 		<div class="poll-info blog-info"><a href="{% url 'core:blog' post.slug %}">{{ post.title }}</a><span><span class="poll-date blog-date" style="font-size:20px">{{ post.timestamp }}</span> </span></div>
 		<div class="poll-results blog-description">

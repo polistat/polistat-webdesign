@@ -990,13 +990,13 @@ main .content .mobile-votes {
 		width: 100%;
 	}
 
-	#h270 {
+	#h269 {
 		height: 100% !important;
 		background-color: rgba(51, 51, 51, 0.35);
 		position: relative;
 
 		&:after {
-			content: "270";
+			content: "Tie";
 			position: absolute;
 			top: -1.4em;
 			left: 50%;
@@ -1007,12 +1007,12 @@ main .content .mobile-votes {
 		}
 	}
 
-	#h270 {
+	#h269 {
 		&:before {
 			content: "+0";
 			position: absolute;
 			bottom: -1.7em;
-			font-weight: 500;
+			font-weight: 700;
 			color: rgba(51, 51, 51, 0.35);
 			font-size: 1.5em;
 			left: 50%;

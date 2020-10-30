@@ -21,13 +21,6 @@
 <h1>{{blogpost.title}}</h1>
 <hr>
 
-<div>{% autoescape off %}{{text}}{% endautoescape %}</div>
-
-<style>
-img {width:100%;object-position: center;object-fit:contain;max-height:30em;}
-table {width:100%;align:center;text-align:center;border-collapse:collapse}
-td {border:1px solid gray;padding:10px}
-th {border:1px solid gray;padding:10px;background-color:#eeeeee}
-</style>
+<div class="blogpost">{% autoescape off %}{{text}}{% endautoescape %}</div>
 
 {% endblock %}

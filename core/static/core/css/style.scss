@@ -133,7 +133,7 @@ nav ul.desktop {
 		height: 40px;
 	}
 
-	@media only screen and (max-width: 750px) {
+	@media only screen and (max-width: 900px) {
 		li {
 			display: none;
 		}
@@ -230,7 +230,7 @@ nav ul.desktop {
 	}
 
 	display: none;
-	@media only screen and (max-width: 750px) {
+	@media only screen and (max-width: 900px) {
 		display: block;
 	}
 }
@@ -903,6 +903,10 @@ main .content .mobile-votes {
 	-webkit-text-fill-color: transparent;
 }
 
+.blogindexentry {
+	margin-bottom: 1em;
+}
+
 .poll {
 	font-size: 1.5em;
 	.poll-info {
@@ -1069,4 +1073,11 @@ main .content .mobile-votes {
 
 a {
 	word-break: break-word;
+}
+
+.blogpost {
+	img {width:100%;object-position: center;object-fit:contain;max-height:30em;}
+	table {width:100%;align:center;text-align:center;border-collapse:collapse}
+	td {border:1px solid gray;padding:10px}
+	th {border:1px solid gray;padding:10px;background-color:#eeeeee}
 }

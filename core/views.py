@@ -14,6 +14,7 @@ def index(request):
 
 	trumpev = State.objects.filter(trump__gt=50).aggregate(Sum('electoral_votes'))['electoral_votes__sum'] + State.objects.filter(trump2__gt=50).count()
 	bidenev = State.objects.filter(biden__gt=50).aggregate(Sum('electoral_votes'))['electoral_votes__sum'] + State.objects.filter(biden2__gt=50).count()
+	print(trumpev, bidenev)
 	assert (trumpev + bidenev) == 538
 
 	model = {}
@@ -55,7 +56,7 @@ def state(request,initials):
 def blog(request,slug):
     post = get_object_or_404(Blogpost,slug=slug)
     if post.published or (request.user and len(request.user.groups.filter(name="Students"))>0):
-        return render(request,"core/blogpost.html",{"blogpost":post,"text":markdown(get_object_or_404(Blogpost,slug=slug).content,extensions=['tables','footnotes'])})
+        return render(request,"core/blogpost.html",{"blogpost":post,"text":markdown(get_object_or_404(Blogpost,slug=slug).content,extensions=['tables','footnotes','mdx_linkify'])})
     else:
         return HttpResponseRedirect(reverse("core:index"))
 def blogindex(request):

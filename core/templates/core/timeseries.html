@@ -87,6 +87,8 @@ function draw() {
 	datelabel.style.left = Math.max(timeseries.getBoundingClientRect().x + window.scrollX, Math.round(dateline.getBoundingClientRect().x + window.scrollX - datelabel.offsetWidth/2, 3))+'px'
 	datelabel.style.top = Math.round(dateline.getBoundingClientRect().y + window.scrollY - datelabel.offsetHeight, 3)+'px'
 
+	if ((a => a.x + a.width)(datelabel.getBoundingClientRect()) > endlabel.getBoundingClientRect().x - 10) endlabel.style.display = 'none'
+
 	bidencircle.setAttributeNS(null, 'r', 6.5)
 	trumpcircle.setAttributeNS(null, 'r', 6.5)
 	bidencircle.setAttributeNS(null, 'cx', Math.max(3, day*(width / days)))

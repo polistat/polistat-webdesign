@@ -39,10 +39,10 @@ function datestring(date) {
 function draw() {
 	let height = timeseries.getBoundingClientRect().height - 20
 	let width = timeseries.getBoundingClientRect().width
-	bidenline.setAttributeNS(null, 'points', biden.slice(0, day+1).map((p, i) => i*(width / days)+','+((1-p/100) * height + 10)))
-	trumpline.setAttributeNS(null, 'points', trump.slice(0, day+1).map((p, i) => i*(width / days)+','+((1-p/100) * height + 10)))
-	lightbidenline.setAttributeNS(null, 'points', biden.map((p, i) => i*(width / days)+','+((1-p/100) * height + 10)))
-	lighttrumpline.setAttributeNS(null, 'points', trump.map((p, i) => i*(width / days)+','+((1-p/100) * height + 10)))	
+	bidenline.setAttributeNS(null, 'points', biden.slice(0, day+1).map((p, i) => i*((width-7) / days)+','+((1-p/100) * height + 10)))
+	trumpline.setAttributeNS(null, 'points', trump.slice(0, day+1).map((p, i) => i*((width-7) / days)+','+((1-p/100) * height + 10)))
+	lightbidenline.setAttributeNS(null, 'points', biden.map((p, i) => i*((width-7) / days)+','+((1-p/100) * height + 10)))
+	lighttrumpline.setAttributeNS(null, 'points', trump.map((p, i) => i*((width-7) / days)+','+((1-p/100) * height + 10)))
 	for (let i = 0; i < bars.length; i++) {
 		bars[i].setAttributeNS(null, 'points', `0,${height*(i/(bars.length-1)) + 10} ${width - 10},${height*(i/(bars.length-1)) + 10}`)
 	}
@@ -63,16 +63,16 @@ function draw() {
 
 	let labels = document.getElementsByClassName("xlabel")
 	for (let i = 0; i < labelDates.length; i++) {
-		labels[i].style.left = (labelDates[i]*(width / days) - labels[i].offsetWidth/2)+'px'
+		labels[i].style.left = (labelDates[i]*((width-7) / days) - labels[i].offsetWidth/2)+'px'
 	}
 
-	endline.setAttributeNS(null, 'x1', width-3)
-	endline.setAttributeNS(null, 'x2', width-3)
+	endline.setAttributeNS(null, 'x1', width-7)
+	endline.setAttributeNS(null, 'x2', width-7)
 	endline.setAttributeNS(null, 'y1', 3)
 	endline.setAttributeNS(null, 'y2', height+10)
 
-	dateline.setAttributeNS(null, 'x1', Math.max(3, day*(width / days)))
-	dateline.setAttributeNS(null, 'x2', Math.max(3, day*(width / days)))
+	dateline.setAttributeNS(null, 'x1', Math.max(3, day*((width-7) / days)))
+	dateline.setAttributeNS(null, 'x2', Math.max(3, day*((width-7) / days)))
 	dateline.setAttributeNS(null, 'y1', 3)
 	dateline.setAttributeNS(null, 'y2', height+10)
 
@@ -91,9 +91,9 @@ function draw() {
 
 	bidencircle.setAttributeNS(null, 'r', 6.5)
 	trumpcircle.setAttributeNS(null, 'r', 6.5)
-	bidencircle.setAttributeNS(null, 'cx', Math.max(3, day*(width / days)))
+	bidencircle.setAttributeNS(null, 'cx', Math.max(3, day*((width-7) / days)))
 	bidencircle.setAttributeNS(null, 'cy', ((1-biden[day]/100) * height + 10))
-	trumpcircle.setAttributeNS(null, 'cx', Math.max(3, day*(width / days)))
+	trumpcircle.setAttributeNS(null, 'cx', Math.max(3, day*((width-7) / days)))
 	trumpcircle.setAttributeNS(null, 'cy', ((1-trump[day]/100) * height + 10))
 
 	bidenlabel.textContent = 'Biden ' + Math.round(biden[day]) + '%'
@@ -113,7 +113,7 @@ function draw() {
 
 let biden = {{ timeseries.biden }}
 let trump = {{ timeseries.trump }}
-let days = 64;
+let days = 63;
 let day = biden.length - 1;
 
 let bars = []
